@@ -2,6 +2,18 @@
 {% load static %}
 {% load replace_string %}
 {% block title %} Jobsgroup.org | Contact us {% endblock %}
+
+{% block meta_data %}
+<meta property="og:image" content="{% static 'assets/images/logo.png' %}" />
+<meta property="og:image:alt" content="contact us logo">
+<meta name="og:url" content="https://jobsgroup.org/contact-us">
+<meta name="og:title" content="Jobsgroup.org | Contact Us">
+<meta name="og:site_name" content="Jobsgroup.org | Jobs in Afghanistan">
+<meta property="og:description" content="Have anything to say? We're glad to hear from you!" />
+<meta name="keywords" content="contact jobsgroup.org, contact us, contact jobsgroup">
+{% endblock %}
+
+
 {% block styles %}
 <style>
     p strong {
@@ -84,7 +96,7 @@
                                 <div class="icon-bx-xs border-1"> <a href="#" class="icon-cell"><i
                                             class="ti-mobile"></i></a> </div>
                                 <div class="icon-content">
-                                    <h6 class="text-uppercase m-tb0 dez-tilte">Whatsapp Only</h6>
+                                    <h6 class="text-uppercase m-tb0 dez-tilte">Whatsapp Only:</h6>
                                     <p>+93 706567669</p>
                                 </div>
                             </li>

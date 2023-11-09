@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load replace_string %}
+
+{% block title %} Jobsgroup.org | Our Privacy Policy {% endblock %}
+
+{% block meta_data %} 
+<meta property="og:title"         content="jobsgroup.org | Privacy Policy" />
+<meta property="og:image" content="{% static 'assets/images/logo.png' %}">
+<meta property="og:description" content="Your privacy is on our top priority!">
+<meta name="og:url" content="https://jobsgroup.org/our-policy">
+<meta name="og:site_name" content="Jobsgroup.org | Jobs in Afghanistan">
+
+{% endblock %}
+
 {% block styles %}
 <style>
     .side-widget {

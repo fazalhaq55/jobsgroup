@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load replace_string %}
+
+{% block meta_data %} 
+
+<meta property="og:image" content="{% static 'assets/images/logo.png' %}" />
+<meta name="og:title" content="Jobs in {{ category.category }}">
+<meta name="og:site_name" content="Jobsgroup.org | Jobs in Afghanistan">
+<meta name="keywords"
+  content="jobs in {{ category.category }}">
+
+{% endblock %}
+
 {% block styles %}
 <style>
     .side-widget
@@ -26,6 +37,9 @@
 {% endblock %}
 
 {% block head %} 
+<meta name="google-adsense-account" content="ca-pub-8245638410583528">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8245638410583528"
+     crossorigin="anonymous"></script>
 
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-00NJC085NT"></script>

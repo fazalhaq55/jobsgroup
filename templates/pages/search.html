@@ -1,18 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 
-<meta name="description" content="Jobsgroup.org is The Fastest Growing Jobs Portal in World Offering The Vacancies in United Nations, NGO, European Union">
-<meta name="keywords" content="software engineer jobs, graphic designer careers, marketing manager positions, hiring sales representative, finance jobs, healthcare careers,
-education positions, technology employment opportunities, New York City jobs, Los Angeles careers, remote jobs, management careers, part-time positions, jobs in undp,
-jobs in un, un jobs, united nation jobs, jobs in canada">
-
+{% block meta_data %} 
+<meta property="og:title"         content="Jobsgroup.org | Search Your Dream Job" />
 <meta property="og:image" content="{% static 'assets/images/logo.png' %}" />
-<meta property="og:title"         content="Jobs in | {{ where_keyword }}" />
-<meta property="og:image:alt" content="search page logo">
-<meta name="og:url" content="https://www.jobsgroup.org/jobs-by-location/{{ where_keyword }}">
-<meta name="og:title" content="Jobsgroup.org | Jobs in United Nations, NGO, European Union">
-<meta name="og:site_name" content="Jobsgroup.org">
+<meta name="og:site_name" content="Jobsgroup.org | Jobs in Afghanistan">
+<meta name="keywords"
+  content="search for job, search job, search in job">
 
+{% endblock %}
 {% load replace_string %}
 {% block styles %}
 <style>
@@ -62,7 +58,8 @@ jobs in un, un jobs, united nation jobs, jobs in canada">
 
 {% block head %}
 
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7962170340896214"
+<meta name="google-adsense-account" content="ca-pub-8245638410583528">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8245638410583528"
      crossorigin="anonymous"></script>
      
 <!-- Google tag (gtag.js) -->

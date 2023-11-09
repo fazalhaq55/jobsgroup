@@ -13,10 +13,17 @@
 {% endif %}
 ">
 
-<meta name="og:site_name" content="Jobsgroup.org | Jobs in United Nations, NGO, European Union">
+<meta name="og:site_name" content="Jobsgroup.org | Jobs in Afghanistan">
 <meta name="og:description" content="{{ job.organzation }}">
+<meta name="keywords" content="jobs in {{job.organzation}}, {{ job.job_title|replace_string }}, jobs in {{ job.job_location }}, jobs in {{ job.category }}, jobs for {{ job.education }}">
 
-<meta name="keywords" content="jobs in {{job.organzation}}, {{ job.job_title|replace_string }}, jobs in {{ job.job_location }}">
+<meta property="og:image" content="
+{% if job.org_photo.vector_photo %}
+  {{ job.org_photo.vector_photo.url }}
+{% else %}
+  {% static 'assets/images/logo.png' %}
+{% endif %}
+" />
 
 {% endblock %}
 
@@ -52,9 +59,11 @@
 {% endblock %}
 
 {% block head %}
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7962170340896214"
+
+<meta name="google-adsense-account" content="ca-pub-8245638410583528">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8245638410583528"
      crossorigin="anonymous"></script>
-     
+
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-00NJC085NT"></script>
 <script>
