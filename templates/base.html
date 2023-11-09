@@ -1,0 +1,120 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% block head %} {% endblock %}
+    {% load static %}
+    
+    <meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="Jobsgroup.org is The Fastest Growing Jobs Portal in World Offering The Vacancies in United Nations, NGO, European Union">
+    <meta name="keywords" content="software engineer jobs, graphic designer careers, marketing manager positions, hiring sales representative, finance jobs, healthcare careers,
+    education positions, technology employment opportunities, New York City jobs, Los Angeles careers, remote jobs, management careers, part-time positions, jobs in undp,
+    jobs in un, un jobs, united nation jobs, jobs in canada">
+
+    <meta property="og:image" content="{% static 'assets/images/favicon.png' %}" />
+    <meta property="og:image:alt" content="index page logo">
+    <meta name="og:url" content="https://jobsgroup.org/">
+    <meta name="og:title" content="Jobsgroup.org | Jobs in United Nations, NGO, European Union">
+    <meta name="og:site_name" content="Jobsgroup.org">
+        
+	<meta name="format-detection" content="telephone=no">
+	
+	<!-- FAVICONS ICON -->
+	<link rel="icon" href="{% static 'assets/images/favicon.ico' %}" type="image/x-icon" />
+	<link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/images/favicon.png' %}" />
+	
+	<!-- PAGE TITLE HERE -->
+
+    <title>{% block title %} JobsGroup | Jobs in United Nations, NGO, European Union {% endblock %}</title>
+	
+	<!-- MOBILE SPECIFIC -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<!-- STYLESHEETS -->
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/css/plugins.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/css/templete.css' %}">
+	<link class="skin" rel="stylesheet" type="text/css" href="{% static 'assets/css/skin/skin-1.css' %}">
+	<link rel="stylesheet" href="{% static 'assets/plugins/datepicker/css/bootstrap-datetimepicker.min.css' %}"/>
+	<!-- Revolution Slider Css -->
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/plugins/revolution/revolution/css/layers.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/plugins/revolution/revolution/css/settings.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'assets/plugins/revolution/revolution/css/navigation.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/custom.css' %}">
+
+    <style>
+        .footer_links a:hover {
+            color: white !important;
+            text-decoration: underline;
+        }
+        .footer_links a:visited {
+            color: white !important;
+        }
+    </style>
+
+    {% block styles %} 
+  
+    {% endblock %}
+   
+</head>
+<body id="bg">
+    
+    <div class="page-wraper">
+   <!-- Nacbar -->
+    {% include 'partials/_navbar.html' %}
+
+    <!-- Main content -->
+    {% block content %} {% endblock %}
+
+    <!-- footer -->
+    {% include 'partials/_footer.html' %}
+  </div>
+
+   <!-- JAVASCRIPT FILES ========================================= -->
+<script src="{% static 'assets/js/jquery.min.js' %}"></script><!-- JQUERY.MIN JS -->
+<script src="{% static 'assets/plugins/wow/wow.js' %}"></script><!-- WOW JS -->
+<script src="{% static 'assets/plugins/bootstrap/js/popper.min.js' %}"></script><!-- BOOTSTRAP.MIN JS -->
+<script src="{% static 'assets/plugins/bootstrap/js/bootstrap.min.js' %}"></script><!-- BOOTSTRAP.MIN JS -->
+<script src="{% static 'assets/plugins/bootstrap-select/bootstrap-select.min.js' %}"></script><!-- FORM JS -->
+<script src="{% static 'assets/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.js' %}"></script><!-- FORM JS -->
+<script src="{% static 'assets/plugins/counter/waypoints-min.js' %}"></script><!-- WAYPOINTS JS -->
+<script src="{% static 'assets/plugins/counter/counterup.min.js' %}"></script><!-- COUNTERUP JS -->
+<script src="{% static 'assets/plugins/imagesloaded/imagesloaded.js' %}"></script><!-- IMAGESLOADED -->
+<script src="{% static 'assets/plugins/masonry/masonry-3.1.4.js' %}"></script><!-- MASONRY -->
+<script src="{% static 'assets/plugins/masonry/masonry.filter.js' %}"></script><!-- MASONRY -->
+<script src="{% static 'assets/plugins/owl-carousel/owl.carousel.js' %}"></script><!-- OWL SLIDER -->
+<script src="{% static 'assets/plugins/rangeslider/rangeslider.js' %}" ></script><!-- Rangeslider -->
+<script src="{% static 'assets/js/custom.js' %}"></script><!-- CUSTOM FUCTIONS  -->
+<script src="{% static 'assets/js/dz.carousel.js' %}"></script><!-- SORTCODE FUCTIONS  -->
+<script src="{% static 'assets/js/dz.ajax.js' %}"></script><!-- CONTACT JS  -->
+<script src="{% static 'assets/plugins/paroller/skrollr.min.js' %}"></script><!-- PAROLLER -->
+<!-- Go to www.addthis.com/dashboard to customize your tools --> 
+
+   <script type="text/javascript">
+
+    </script>
+   <script>function openRightMenu() {
+       document.getElementById("rightMenu").style.display = "block";
+   }
+   function closeRightMenu() {
+       document.getElementById("rightMenu").style.display = "none";
+   }</script>
+
+   <script>
+    // tooltip demo
+    $('.tooltip-demo').tooltip({
+        selector: "[data-toggle=tooltip]",
+        container: "body",
+        html: "true", 
+    })
+
+
+    // popover demo
+    $("[data-toggle=popover]")
+        .popover();
+    </script>
+  {% block scripts %} {% endblock %}
+
+</body>
+</html>

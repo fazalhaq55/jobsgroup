@@ -1,0 +1,119 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load replace_string %}
+{% block title %} {{ job.job_title|replace_string }} {% endblock %}
+{% block styles %}
+<style>
+    p strong {
+        font-weight: 700 !important;
+    }
+
+    .job-info-box h5 {
+        font-weight: 700 !important;
+    }
+
+    .job-info-box h3 {
+        font-weight: 700 !important;
+    }
+
+    p {
+        padding-left: 15px;
+    }
+</style>
+{% endblock %}
+
+{% block head %}
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-00NJC085NT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-00NJC085NT');
+</script>
+
+{% endblock %}
+
+
+{% block content %}
+
+<!-- Content -->
+<div class="page-content bg-white">
+    <!-- inner page banner -->
+    <div class="row" style="background-color: #2d6b9f; color: white;"> 
+        <div class="container">
+            <br>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="{% static 'assets/img/contact.svg' %}" width="300" height="300" title="contact us image" alt="">
+                        <br><br>
+                    </div>
+                    <div class="col-md-8" style="padding: 10px !important; margin-top: 30px;">
+                        <h3 style="color: white;">Do you have something to share? We welcome your thoughts!
+                        </h3>
+                        <p style="padding-left:0px !important">JobsGroup.org stands as the rapidly expanding job platform in Afghanistan, presenting job opportunities across the entire nation.</p>
+                        <a href="" class="site-button facebook">Go Back To Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- inner page banner END -->
+    <!-- contact area -->
+    <div class="section-full content-inner bg-white contact-style-1">
+        <div class="container">
+            <div class="row">
+                <!-- right part start -->
+                <div class="col-lg-4 col-md-6 d-lg-flex d-md-flex">
+                    <div class="p-a30 border m-b30 contact-area border-1 align-self-stretch radius-sm">
+                        <h4 class="m-b10">Quick Contact</h4>
+                        <p>If you have any questions simply use the following contact details.</p>
+                        <ul class="no-margin">
+                            <li class="icon-bx-wraper left  m-b30">
+                                <div class="icon-bx-xs border-1"> <a href="#" class="icon-cell"><i
+                                            class="ti-email"></i></a> </div>
+                                <div class="icon-content">
+                                    <h6 class="text-uppercase m-tb0 dez-tilte">Email:</h6>
+                                    <p>fazalhaqzaland2024@gmail.com</p>
+                                </div>
+                            </li>
+                            <li class="icon-bx-wraper left">
+                                <div class="icon-bx-xs border-1"> <a href="#" class="icon-cell"><i
+                                            class="ti-mobile"></i></a> </div>
+                                <div class="icon-content">
+                                    <h6 class="text-uppercase m-tb0 dez-tilte">PHONE</h6>
+                                    <p>+93 706567669</p>
+                                </div>
+                            </li>
+                        </ul>
+                        <div class="m-t20">
+                            <ul class="dez-social-icon dez-social-icon-lg">
+                                <li><a href="javascript:void(0);" class="fa fa-facebook bg-primary"></a></li>
+                                <li><a href="javascript:void(0);" class="fa fa-twitter bg-primary"></a></li>
+                                <li><a href="javascript:void(0);" class="fa fa-linkedin bg-primary"></a></li>
+                                <li><a href="javascript:void(0);" class="fa fa-pinterest-p bg-primary"></a></li>
+                                <li><a href="javascript:void(0);" class="fa fa-google-plus bg-primary"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <!-- right part END -->
+                <!-- Left part start -->
+                <div class="col-lg-8 col-md-12">
+                    <div class="p-a30 border m-b30 contact-area border-1 align-self-stretch radius-sm">
+                        <h4>The Story</h4>
+                        <p>
+                           Comming Soon
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- contact area  END -->
+</div>
+<!-- Content END-->
+{% endblock %}

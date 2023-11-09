@@ -1,0 +1,353 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load replace_string %}
+{% block styles %}
+<style>
+    .side-widget
+    {
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid #eceff3;
+    margin-bottom: 30px;
+    overflow: hidden;
+    color:black !important;
+    }
+    h4.side-widget-title
+    {
+        margin: 0;
+        text-align: left;
+        padding-left: 12px;
+        color: #fff;
+        font-size: 17px;
+        text-transform: uppercase;
+        line-height: 48px;
+    }
+</style>
+{% endblock %}
+
+{% block head %} 
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-00NJC085NT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-00NJC085NT');
+</script>
+
+{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    <div class="row" style="background-color: #3f60ed; color: white;"> 
+        <div class="container">
+            <br>
+            <div class="col-md-10">
+                <div class="row">
+                    <!-- <div class="col-md-2"></div> -->
+                    <div class="col-md-4">
+                        <img src="{% static 'assets/img/project.svg' %}" width="300" height="300" title="contact us image" alt="">
+                        <br><br>
+                    </div>
+                    <!-- <div class="col-md-2"></div> -->
+                    <div class="col-md-8" style="padding: 10px !important; margin-top: 30px;">
+                        <h3 style="color: white;">Jobs in {{ category.category|capfirst  }}
+                        </h3>
+                        <p style="padding-left:0px !important">{{ count_rows }} Jobs Available for {{ category.category|capfirst }}.</p>
+                        <a href="" class="site-button facebook">Go Back To Home</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   <!-- Our Job -->
+       <div class="section-full bg-white content-inner-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9">
+                    <ul class="post-job-bx">
+                        {% if jobs_founded %}
+                        {% for job in jobs_founded %}
+                        <li>
+                            <a href="{% url '' job.id job.jobs_slug %}" target="_blank">
+                                <div class="d-flex m-b30">
+                                    <div class="job-post-company">
+                                        <span><img src="{% static 'assets/images/logo/icon1.png' %}"></span>
+                                    </div>
+                                    <div class="job-post-info">
+                                        <h4>{{ job.job_title|replace_string|truncatechars:40 }}</h4>
+                                        <ul>
+                                            <li data-toggle="tooltip" data-placement="top" title="{{ job.organzation }}"><i class="fa fa-map-marker"></i> {{ job.organzation|truncatechars:20 }}</li>
+                                            <li data-toggle="tooltip" data-placement="top" title="Location"><i class="fa fa-globe"></i> {{ job.job_location }}</li>
+                                            <li><i class="fa fa-clock-o"></i> {{ job.whenpublished }}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="d-flex">
+                                    <div class="job-time mr-auto">
+                                        <span style="text-transform:capitalize !important;" data-toggle="tooltip" data-placement="top" title="Expires on {{ job.close_date }}">
+                                            <i class="fa fa-calendar"></i> {{ job.close_date }}
+                                        </span>
+                                            
+                                        {% if job.no_of_jobs > '1' %}
+                                        <span style="text-transform:capitalize !important;">{{ job.no_of_jobs }} Vacancies</span>
+                                        {% endif %}
+
+                                        {% if job.gender == 'Male' %}
+                                        <span style="text-transform:capitalize !important;"> {{ job.gender }} <i class="fa fa-male"></i></span>
+                                        {% endif %}
+                                        {% if job.gender == 'Female' %}
+                                        <span style="text-transform:capitalize !important;"> {{ job.gender }} <i class="fa fa-female"></i></span>
+                                        {% endif %}
+
+                                        <span style="text-transform:capitalize !important;" data-toggle="tooltip" data-placement="top" title="Employment Type">
+                                            <i class="fa fa-bookmark-o"></i> {{ job.emp_type }}
+                                        </span>
+                                        
+                                    </div>
+                                </div>
+                                <!-- <span class="post-like fa fa-heart-o"></span> -->
+                            </a>
+                        </li>
+                        {% endfor %}
+                        {% endif %}    
+                    </ul>
+                    <div class="m-t30">
+                        <div class="d-flex">
+                            {% if jobs.has_previous %}
+                            <a class="site-button button-sm mr-auto" href="?page={{ jobs.previous_page_number }}"><i class="ti-arrow-left"></i> Prev</a>
+                            {% endif %}
+                            {% if jobs.has_next %}
+                            <a class="site-button button-sm" href="?page={{ jobs.next_page_number }}">Next <i class="ti-arrow-right"></i></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Adssss -->
+            </div>
+        </div>
+    </div>
+    <!-- Our Job END -->
+    <!-- About Us -->
+    <div class="section-full job-categories content-inner-2 bg-white">
+        <div class="container">
+            <div class="section-head d-flex head-counter clearfix" style="margin-bottom: 10px !important;">
+                <div class="mr-auto">
+                    <h2 class="m-b5">Browse Jobs By </h2>
+                </div>
+                <div class="head-counter-bx">
+                    <h2 class="m-b5 counter">{{ jobs_count }}</h2>
+                    <h6 class="fw3">Jobs Posted</h6>
+                </div>
+                <div class="head-counter-bx">
+                    <h2 class="m-b5 counter">{{ count_companies }}</h2>
+                    <h6 class="fw3">Different Companies</h6>
+                </div>
+            </div>
+            <div class="col-xl-12 col-lg-3 col-md-4 col-sm-4 col-12">
+                <ul class="nav nav-tabs" id="myTab" role="tablist" style="border-bottom:1px solid #2e55fa;">
+                    <li class="nav-item">
+                      <a class="nav-link active" id="functional_area-tab" data-toggle="tab" href="#functional_area" role="tab" aria-controls="functional_area" aria-selected="true">Functional Area</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="female_only-tab" data-toggle="tab" href="#female_only" role="tab" aria-controls="female_only" aria-selected="false">Females Only</a>
+                    </li>
+                    <li class="nav-item">
+                      <a class="nav-link" id="expiring_today-tab" data-toggle="tab" href="#expiring_today" role="tab" aria-controls="expiring_today" aria-selected="false">Expiring Today</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="location-tab" data-toggle="tab" href="#location" role="tab" aria-controls="location" aria-selected="false">Location</a>
+                      </li>
+                  </ul>
+                  <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="functional_area" role="tabpanel" aria-labelledby="functional_area-tab">
+                        
+                        <div class="widget border-0">
+                            <ul class="list-2 w10 list-line">
+                                {% if categories  %}
+                                {% for cate in categories %}
+                                    <li class="col-md-3">   <a href="{% url 'category' cate.slug_cate %}">{{ cate.category }} <span style="color:#6aca00;">({{ cate.total }})</span></a></li>
+                                {% endfor %}
+                                {% endif %}
+                            </ul>
+                        </div>
+                        
+                    </div>
+                    <div class="tab-pane fade" id="female_only" role="tabpanel" aria-labelledby="female_only-tab">
+                        <div class="widget border-0">
+                            <ul class="list-2 w10 list-line">
+                                {% if females_only  %}
+                                {% for f in females_only %}
+                                    <li class="col-md-4"><a href="{% url '' f.id f.jobs_slug %}">{{ f.job_title|replace_string|truncatechars:40 }}</a></li>
+                                {% endfor %}
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="expiring_today" role="tabpanel" aria-labelledby="expiring_today-tab">
+                        <div class="widget border-0">
+                            <ul class="list-2 w10 list-line">
+                                {% if ExpiringJobs  %}
+                                {% for e in ExpiringJobs %}
+                                    <li class="col-md-4"><a href="{% url '' e.id e.jobs_slug %}">{{ e.job_title|replace_string|truncatechars:40 }}</a></li>
+                                {% endfor %}
+                                {% endif %}
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="tab-pane fade" id="location" role="tabpanel" aria-labelledby="location-tab">
+                        <div class="widget border-0">
+                            <ul class="list-2 w10 list-line">
+                                {% for i in locations %}
+                                {% if i.job_location|length < 10 %}
+                                    <li class="col-md-4"><a href="{% url 'jobs-by-location' i.job_location|lower %}">{{ i.job_location }} <span style="color:#6aca00;">({{ i.total }} Jobs)</span></a></li>
+                                {% endif %}
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                  </div>
+                  
+            </div>
+        </div>
+    </div>
+    <!-- About Us END -->
+   
+<!-- Call To Action -->
+<div class="section-full content-inner bg-gray">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 section-head text-center">
+                <h2 class="m-b5">Featured Cities</h2>
+                <h6 class="fw4 m-b0">20+ Featured Cities Added Jobs</h5>
+            </div>
+        </div>
+        <div class="row">
+            {% for i in featured_cities %}
+            {% if i.job_location|length < 10 %}
+            <div class="col-lg-3 col-sm-6 col-md-6 m-b30">
+                <a href="">
+                    <div class="city-bx align-items-end  d-flex" style="background-image:url(
+                                {% if i.job_location == 'Kabul' %}
+                                {% static 'assets/pr/kabul.png ' %}
+
+                                {% elif i.job_location == 'Herat' %}
+                                {% static 'assets/pr/herat.png ' %}
+
+                                {% elif i.job_location == 'Balkh' %}
+                                {% static 'assets/pr/balkh.png ' %}
+
+                                {% elif i.job_location == 'Kandahar' %}
+                                {% static 'assets/pr/kandahar.png ' %}
+
+                                {% elif i.job_location == 'Nangarhar' %}
+                                {% static 'assets/pr/nangarhar.png ' %}
+
+                                {% elif i.job_location == 'Ghazni' %}
+                                {% static 'assets/pr/ghazni.png ' %}
+
+                                {% elif i.job_location == 'Badghis' %}
+                                {% static 'assets/pr/badghais.png ' %}
+
+                                {% elif i.job_location == 'Takhar' %}
+                                {% static 'assets/pr/takhar.png ' %}
+
+                                {% elif i.job_location == 'Oruzgan' %}
+                                {% static 'assets/pr/oruzgan.png ' %}
+
+                                {% elif i.job_location == 'Kunduz' %}
+                                {% static 'assets/pr/kunduz.png ' %}
+
+                                {% elif i.job_location == 'Khost' %}
+                                {% static 'assets/pr/khost.png ' %}
+
+                                {% elif i.job_location == 'Daikondi' %}
+                                {% static 'assets/pr/daikondi.png ' %}
+
+                                {% elif i.job_location == 'Paktika' %}
+                                {% static 'assets/pr/paktika.png ' %}
+
+                                {% elif i.job_location == 'Wardak' %}
+                                {% static 'assets/pr/wardak.png ' %}
+
+                                {% elif i.job_location == 'Zabul' %}
+                                {% static 'assets/pr/zabul.png ' %}
+
+                                {% elif i.job_location == 'Sar-e Pol' %}
+                                {% static 'assets/pr/sare-pol.png ' %}
+
+                                {% elif i.job_location == 'Samangan' %}
+                                {% static 'assets/pr/samangan.png ' %}
+
+                                {% elif i.job_location == 'Kunar' %}
+                                {% static 'assets/pr/kunar.png ' %}
+
+                                {% elif i.job_location == 'Paktia' %}
+                                {% static 'assets/pr/paktia.png ' %}
+
+                                {% elif i.job_location == 'Bamian' %}
+                                {% static 'assets/pr/bamian.png ' %}
+
+                                {% elif i.job_location == 'Panjshir' %}
+                                {% static 'assets/pr/herat.png ' %}
+
+                                {% elif i.job_location == 'Laghman' %}
+                                {% static 'assets/pr/laghman.png ' %}
+
+                                {% elif i.job_location == 'Helmand' %}
+                                {% static 'assets/pr/helmand.png ' %}
+
+                                {% elif i.job_location == 'Faryab' %}
+                                {% static 'assets/pr/faryab.png ' %}
+
+                                {% elif i.job_location == 'Badakhshan' %}
+                                {% static 'assets/pr/badakhshan.png ' %}
+
+                                {% elif i.job_location == 'Logar' %}
+                                {% static 'assets/pr/logar.png ' %}
+
+                                {% elif i.job_location == 'Nimruz' %}
+                                {% static 'assets/pr/nimruz.png ' %}
+
+                                {% elif i.job_location == 'Kapisa' %}
+                                {% static 'assets/pr/kapisa.png ' %}
+
+                                {% elif i.job_location == 'Ghowr' %}
+                                {% static 'assets/pr/ghowr.png ' %}
+
+                                {% elif i.job_location == 'Farah' %}
+                                {% static 'assets/pr/farah.png ' %}
+
+                                {% elif i.job_location == 'Jawzjan' %}
+                                {% static 'assets/pr/jawzjan.png ' %}
+
+                                {% elif i.job_location == 'Nuristan' %}
+                                {% static 'assets/pr/nuristan.png ' %}
+
+                                {% elif i.job_location == 'Parwan' %}
+                                {% static 'assets/pr/parwan.png ' %}
+
+                                {% elif i.job_location == 'Baghlan' %}
+                                {% static 'assets/pr/baghlan.png ' %}
+                                {% endif %}
+
+                            )">
+                            <div class="city-info">
+                                <h5>{{ i.job_location }}</h5>
+                                <span>{{ i.total }} Jobs</span>
+                            </div>
+                     </div>
+                </a>
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<!-- Call To Action END -->
+</div>
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load replace_string %}
+{% block title %} {{ job.job_title|replace_string }} {% endblock %}
+{% block styles %}
+<style>
+  p strong{
+    font-weight: 600 !important;
+  }
+  .sticky-top h5 {
+    font-weight: 600 !important;
+  }
+  .job-info-box h3 {
+    font-weight: 600 !important;
+  }
+  p {
+    padding-left: 15px;
+  }
+</style>
+{% endblock %}
+
+{% block head %} 
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-00NJC085NT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-00NJC085NT');
+</script>
+
+{% endblock %}
+
+
+{% block content %}
+
+ <!-- Content -->
+ <div class="page-content">
+<div class="content-block">
+      <!-- Job Detail -->
+<div class="section-full content-inner-1">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-8">
+        <div class="sticky-top">
+          <div class="row">
+            <div class="col-lg-12 col-md-6">
+              <div class="widget bg-white p-lr20 p-t20  widget_getintuch radius-sm">
+                <h4 class="text-black font-weight-700 p-t10 m-b15">{{ job.job_title }}</h4>
+                <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+
+                {% autoescape off %}
+                <h5 class="font-weight-600">Submission Guidlines</h5>
+                {{ job.submission_guidelines }}
+                {% endautoescape %}
+                <h5>Submission Email: </h5>
+                {% if job.submission_email == None %}  
+                <p></p>               
+                {% else %} 
+                 {% autoescape off %}
+                   {% if job.is_expired %}
+                  <span style="background-color: #d20001;color:white;padding:5px;border-radius: 5px;">This job has been expired!</span>
+                  {% else %}
+                  <p>{{ job.submission_email }}<p>
+                  {% endif %}
+                {% endautoescape %}
+                {% endif %} 
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <!-- Job Detail -->
+
+</div>
+</div>
+<!-- Content END-->
+{% endblock %}

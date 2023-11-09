@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %} 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R97FMRD95N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-R97FMRD95N');
+</script>
+
+{% endblock %}
+{% block content %}
+<!-- End Navigation -->
+<div class="clearfix"></div>
+
+<!-- Tab Section Start -->
+<section class="simple-bg-screen big-wrap">
+    <div class="container">
+        <div class="error-page">
+            <h2 style="font-size: 40px;">Coming<span> Soon</span></h2>
+            <p style="font-size: 20px;">Under Production... <i class="fa fa-cog fa-spin fa-1x fa-fw"></i></p> 
+            <a href="{% url 'index' %}" class="btn btn-success small-btn">Let's Go Home</a>
+        </div>
+    </div>
+</section>
+<!-- Tab section End -->
+
+{% endblock %}

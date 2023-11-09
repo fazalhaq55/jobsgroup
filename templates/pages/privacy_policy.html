@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load replace_string %}
+{% block styles %}
+<style>
+    .side-widget {
+        background: #fff;
+        border-radius: 4px;
+        border: 1px solid #eceff3;
+        margin-bottom: 30px;
+        overflow: hidden;
+        color: black !important;
+    }
+
+    h4.side-widget-title {
+        margin: 0;
+        text-align: left;
+        padding-left: 12px;
+        color: #fff;
+        font-size: 17px;
+        text-transform: uppercase;
+        line-height: 48px;
+    }
+</style>
+{% endblock %}
+
+{% block head %}
+
+{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    <div class="row" style="background-color: #337ab7; color: white;">
+        <div class="container">
+            <br>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="{% static 'assets/img/privacy-policy.svg' %}" width="300" height="300" alt="">
+                        <br><br>
+                    </div>
+                    <div class="col-md-8" style="padding: 10px !important;margin-top: 30px !important;">
+                        <h3 style="color: white;">Your privacy is on our top priority!</h3>
+                        <p style="padding-left:0px !important">JobsGroup.org stands as the rapidly expanding job platform in Afghanistan, presenting job opportunities across the entire nation.</p>
+                        <!-- <a href="" class="site-button white facebook">About Us</a> -->
+                        <a href="{% url 'index' %}" class="site-button twitter">Go Back To Home </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="container">
+            <hr>
+            <br>
+            <h4>PRIVACY POLICY FOR JobsGroup.Org</h4>
+            <br>
+            <p>At <a href="https://jobsgroup.org/">Jobsgroup.org</a>, we take your privacy seriously. We understand the
+                importance of protecting your
+                personal information and being transparent about our data practices. This policy outlines the ways in
+                which we collect, use, and protect your information when you visit our website.</p>
+
+
+            <h4>Collection of Information</h4>
+
+            <p>Jobsgroup.org is a website that aims to announce available vacancies in afghanistan. We do not collect
+                any personal information from our users. We simply display the job listings with no user data being
+                collected or tracked.
+            </p>
+
+            <h4>Cookies and Other Technologies</h4>
+
+            <p>We do not use cookies or other tracking technologies on our website.</p>
+            <h4>Third-Party Sites</h4>
+            <p>We do not link to any third-party sites on our website.</p>
+
+            <h4>Disclosure of Information</h4>
+            <p>
+                We do not disclose any information as we do not collect any information from our users.
+            </p>
+
+            <h4>Data Security</h4>
+            <p>
+                We take all reasonable steps to ensure the security of your personal information. Our website is hosted
+                on secure servers, and we have implemented technical, administrative, and physical security measures to
+                protect your personal information.
+            </p>
+            <h4>
+                Changes to Our Privacy Policy
+            </h4>
+            <p>
+                We reserve the right to amend this Privacy Policy at any time. We encourage you to review this policy
+                periodically to stay informed about our data practices.
+            </p>
+            <h4>
+                Contact Us
+            </h4>
+            <p>
+                If you have any questions about this Privacy Policy, please contact us at fazalhaqzaland2024@gmail.com
+            </p>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

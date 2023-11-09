@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load replace_string %}
+{% block styles %}
+<style>
+    .side-widget
+    {
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid #eceff3;
+    margin-bottom: 30px;
+    overflow: hidden;
+    color:black !important;
+    }
+    h4.side-widget-title
+    {
+        margin: 0;
+        text-align: left;
+        padding-left: 12px;
+        color: #fff;
+        font-size: 17px;
+        text-transform: uppercase;
+        line-height: 48px;
+    }
+</style>
+{% endblock %}
+
+{% block head %} 
+
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-00NJC085NT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-00NJC085NT');
+</script>
+
+
+{% endblock %}
+
+{% block content %}
+<div class="page-content">
+    <div class="row" style="background-color: #337ab7; color: white;"> 
+        <div class="container">
+            <br>
+            <div class="col-md-10">
+                <div class="row">
+                    <div class="col-md-4">
+                        <img src="{% static 'assets/img/project.svg' %}" title="application form image" width="300" height="300" alt="">
+                        <br><br>
+                    </div>
+                    <div class="col-md-8" style="padding: 10px !important; margin-top:30px !important">
+                        <h3 style="color: white;">Application Froms, Where you can find form applications for any Organization
+                        </h3>
+                        <p style="padding-left:0px !important">JobsGroup.org stands as the rapidly expanding job platform in Afghanistan, presenting job opportunities across the entire nation.</p>
+                        <!-- <a href="" class="site-button white facebook">About Us</a>
+                        <a href="" class="site-button facebook">Home Page</a> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <div class="col-md-10">
+        <table class="table table-bordered">
+            <thead style="color:#2e55fa;">
+                <th>No</th>
+                <th>Description</th>
+                <th>Company</th>
+                <th>Form</th>
+            </thead>
+            <tbody>
+                {% for i in data %}
+                <tr>
+                    <td style="text-align:center;vertical-align:middle;">{{ i.id }}</td>
+                    <td>{{ i.description }}</td>
+                    <td><a style="text-decoration:underline;" href="{{ i.filename.url }}" download>{{ i.company }}</a></td>
+                    <td style="text-align:center;vertical-align:middle;"><a href="{{ i.filename.url }}" download><i class="fa fa-download text-info"></i> Download</a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="pagination">
+                {% if data.has_previous %}
+                <li>
+                    <a href="?page=1"> <i class="fa fa-angle-double-left"></i></a>
+                    <a href="?page={{ data.previous_page_number }}"> <i class="fa fa-angle-left"></i></a>
+                </li>
+                {% endif %}
+                {% for num in data.paginator.page_range %}
+                {% if data.number == num %}
+                <li class="active">
+                    <a><strong>{{ num }}</strong></a>
+                </li>
+                {% elif num > data.number|add:'-3' and num < data.number|add:'3' %}
+                <li>
+                    <a href="?page={{ num }}"> {{ num }}</a>
+                </li>
+                {% endif %}
+                {% endfor %}
+    
+                {% if data.has_next %}
+                <li>
+                    <a href="?page={{ data.next_page_number }}"><i class="fa fa-angle-right"></i></a>
+                    <a href="?page={{ data.paginator.num_pages }}"><i class="fa fa-angle-double-right"></i></a>
+                </li>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    </div>
+</div>
+{% endblock %}

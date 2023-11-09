@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta_data %} 
+<meta name="og:url" content="https://www.jobsgroup.org/companies">
+<meta name="og:title" content="Jobsgroup.org | Companies">
+<meta name="og:site_name" content="Jobsgroup.org | Jobs in United Nations, NGO, European Union">
+<meta name="keywords"
+  content="jobs in  {% for org in organizations %} {{ org.organzation }} {% endfor %}">
+{% endblock %}
+
+{% load replace_string %}
+{% block title %} Companies | JobsGroup {% endblock %}
+{% block styles %}
+<style>
+  p strong{
+    font-weight: 700 !important;
+  }
+  .job-info-box h5 {
+    font-weight: 700 !important;
+  }
+  .job-info-box h3 {
+    font-weight: 700 !important;
+  }
+  p {
+    padding-left: 15px;
+  }
+</style>
+{% endblock %}
+
+{% block head %} 
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7962170340896214"
+     crossorigin="anonymous"></script> 
+     
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-00NJC085NT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-00NJC085NT');
+</script>
+
+{% endblock %}
+
+
+{% block content %}
+
+ <!-- Content -->
+ <div class="page-content bg-white">
+  
+  <div class="container">
+    <div class="find-job-bx">
+        <p class="site-button button-sm">Search For Your Dream Company</p>
+
+        <form class="dezPlaceAni" action="{% url 'search-company' %}" method="GET">
+            <div class="row">
+                <div class="col-lg-10 col-md-8">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" name="company_name" class="form-control" placeholder="Company Name">
+                            <div class="input-group-append">
+                              <span class="input-group-text"><i class="fa fa-search"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-lg-2 col-md-6">
+                    <button type="submit" class="site-button btn-block">Find Now</button>
+                </div>
+            </div>
+        </form>
+    </div>
+  </div>
+  <!-- contact area -->
+  <div class="content-block">
+    <!-- Find Job -->
+    <div class="section-full bg-white content-inner">
+        <div class="container">
+            <div class="col-md-10" style="padding-left: 0px !important;">
+                <div class="section-full job-categories bg-white">
+                    <div class="container">
+                        <div class="row">
+                            {% if organizations %}
+                            {% for org in organizations %}              
+                                <div class="col-lg-3 col-md-6 col-sm-6">
+                                        <div class="icon-bx-wraper">
+                                            <a href="{% url 'companies' org.slug_cpn %}">
+                                            <div class="icon-content">
+                                                <img src="{% static 'assets/img/com.jpg' %}" class="img-responsive" style="object-fit:cover;width: 48px; height: 54px !important;margin-bottom: 10px !important;" alt="">
+
+                                                {% if org.posted_by %}
+                                                <a href="{% url 'companies' org.posted_by org.slug_cpn  %}" style="font-size: 14px !important; text-align: center;" class="dez-tilte">{{ org.organzation }}</a>
+                                                {% else %}
+                                                <a href="{% url 'companies' org.slug_cpn %}" style="font-size: 14px !important; text-align: center;" class="dez-tilte">{{ org.organzation }}</a>
+                                                {% endif %}
+
+                                                <a href="{% url 'companies' org.slug_cpn %}"><p class="site-button button-sm" style="font-size: 13px !important; text-align: center; margin-top: 5px;">{{ org.total }} Open Positions </p></a> 
+                                            </div>
+                                            </a>
+                                        </div>				
+                                </div>
+                            
+                            {% endfor %}
+                            {% endif %}    
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Find Job END -->
+</div>
+</div>
+<!-- Content END-->
+{% endblock %}

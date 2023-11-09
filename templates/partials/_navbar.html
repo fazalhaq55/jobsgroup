@@ -1,0 +1,41 @@
+{% load static %}
+<!-- header -->
+<header class="site-header mo-left header fullwidth">
+    <!-- main header -->
+    <div class="sticky-header main-bar-wraper navbar-expand-lg">
+        <div class="main-bar clearfix">
+            <div class="container clearfix">
+                <!-- website logo -->
+                <div class="logo-header mostion">
+                    <a href="{% url 'index' %}"><img src="{% static 'assets/images/logo.png' %}" class="logo" alt="" style="object-fit: cover;"></a>
+                </div>
+                <!-- nav toggle button -->
+                <!-- nav toggle button -->
+                <button class="navbar-toggler collapsed navicon justify-content-end" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <!-- Quik search -->
+                <div class="dez-quik-search bg-primary">
+                    <form action="#">
+                        <input name="search" value="" type="text" class="form-control" placeholder="Type to search">
+                        <span id="quik-search-remove"><i class="flaticon-close"></i></span>
+                    </form>
+                </div>
+                <!-- main nav -->
+                <div class="header-nav navbar-collapse collapse justify-content-start" id="navbarNavDropdown">
+                    <ul class="nav navbar-nav">
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li><a href="{% url 'jobs' %}">Jobs</a></li>
+                        <li><a href="{% url 'companies' %}">Companies</a></li>
+                        <li><a href="{% url 'application_form' %}">Application Forms</a></li>
+                        <li><a href="{% url 'contact-us' %}">Contact us</a></li>
+                    </ul>			
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- main header END -->
+</header>
+<!-- header END -->

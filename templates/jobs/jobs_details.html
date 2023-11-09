@@ -1,0 +1,186 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load replace_string %}
+{% block meta_data %}
+
+<meta name="og:url" content="https://jobsgroup.org/{% url '' job.id job.jobs_slug %}">
+<meta name="og:title" content="
+
+{% if job.meta_tag|replace_string %}
+{{ job.meta_tag|replace_string }}
+{% else %}
+{{ job.job_title|replace_string }}
+{% endif %}
+">
+
+<meta name="og:site_name" content="Jobsgroup.org | Jobs in United Nations, NGO, European Union">
+<meta name="og:description" content="{{ job.organzation }}">
+
+<meta name="keywords" content="jobs in {{job.organzation}}, {{ job.job_title|replace_string }}, jobs in {{ job.job_location }}">
+
+{% endblock %}
+
+
+{% block title %} {{ job.job_title|replace_string }} {% endblock %}
+{% block styles %}
+<style>
+  p strong {
+    font-weight: 700 !important;
+  }
+
+  .job-info-box h5 {
+    font-weight: 700 !important;
+  }
+
+  .job-info-box h3 {
+    font-weight: 700 !important;
+  }
+
+  p {
+    padding-left: 15px;
+  }
+
+  ul .li_ li {
+    padding: 0px !important;
+    margin-top: 15px;
+  }
+  .job-info-box a {
+    color: #0089ff !important;
+  }
+  
+</style>
+{% endblock %}
+
+{% block head %}
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7962170340896214"
+     crossorigin="anonymous"></script>
+     
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-00NJC085NT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-00NJC085NT');
+</script>
+
+{% endblock %}
+
+
+{% block content %}
+
+<!-- Content -->
+<div class="page-content bg-white">
+  <!-- contact area -->
+  <div class="content-block">
+    <!-- Job Detail -->
+    <div class="section-full content-inner-1">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4">
+            <div class="sticky-top">
+              <div class="row">
+                <div class="col-lg-12 col-md-6">
+                  <div class="widget bg-white p-lr20 p-t20  widget_getintuch radius-sm">
+                    <h4 class="text-black font-weight-700 p-t10 m-b15">Job Details</h4>
+                    <ul>
+                      <li><strong class="font-weight-700 text-black">Views</strong><span class="text-black-light"> {{ job.views}} </span></li>
+                      <li><strong class="font-weight-700 text-black">Position Title</strong><span class="text-black-light"> {{ job.job_title|replace_string }} </span></li>
+                      <li><strong class="font-weight-700 text-black">Location</strong><span class="text-black-light"> {{ job.job_location }} </span></li>
+                      <li><strong class="font-weight-700 text-black">City</strong><span class="text-black-light"> {{ job.city }} </span></li>
+                      <li><strong class="font-weight-700 text-black">Organization</strong><span class="text-black-light"> {{ job.organzation }} </span></li>
+                      <li><strong class="font-weight-700 text-black">Vacancy Number</strong><span class="text-black-light"> {{ job.vacancy_number }} </span></li>
+                      <li><strong class="font-weight-700 text-black">No of Jobs</strong><span class="text-black-light"> {{ job.no_of_jobs }} </span></li>
+                      <li><strong class="font-weight-700 text-black">Salary</strong><span class="text-black-light"> {{ job.salary }} </span></li>
+                      <li><strong class="font-weight-700 text-black">Nationality</strong><span class="text-black-light"> {{ job.nationality }} </span></li>
+                      <li><strong class="font-weight-700 text-black">Category</strong><span class="text-black-light"> {{ job.category }} </span></li>
+                      <li><strong class="font-weight-700 text-black">Employment Type</strong><span class="text-black-light"> {{ job.emp_type }} </span></li>
+                      <li><strong class="font-weight-700 text-black">Year of Experience</strong><span class="text-black-light"> {{ job.years_of_experience }} </span></li>
+                      <li><strong class="font-weight-700 text-black">Contract Duration</strong><span class="text-black-light"> {{ job.contract_duration }} </span></li>
+                      <li><strong class="font-weight-700 text-black">Gender</strong><span class="text-black-light"> {{ job.gender }} </span></li>
+                      <li><strong class="font-weight-700 text-black">Education</strong><span class="text-black-light"> {{ job.education }} </span></li>
+                      <li><strong class="font-weight-700 text-black">Close Date</strong>
+                        <span class="text-black-light">
+                          {{ job.close_date }}
+                        </span>
+                      </li>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="job-info-box">
+              <h3 class="m-t0 m-b10 font-weight-700 title-head">
+                <a href="#" class="text-secondry m-r30" style="color: black !important;">{{ job.job_title|replace_string }}</a>
+              </h3>
+              
+              <ul class="job-info">
+                <li><strong>No of Jobs: </strong> {{ job.no_of_jobs }}</li><br>
+                <li><strong>Organization:</strong> {{ job.organzation }}</li><br>
+                <li><strong>Location :</strong> {{ job.job_location }}</li><br>
+                <li><strong>Close Date :</strong> {{ job.close_date }}</li><br>
+                
+              </ul>
+              <hr>
+
+
+              {% autoescape off %}
+              <h5 class="font-weight-600">About Organzation</h5>
+              <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+              {{ job.About_description }}
+              {% endautoescape %}
+
+
+              {% autoescape off %}
+              <h5 class="font-weight-600">Job Description</h5>
+              <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+              {{ job.job_descriptions }}
+              {% endautoescape %}
+
+              {% autoescape off %}
+              <h5 class="font-weight-600">Job Requirements</h5>
+              <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+              {{ job.job_requirements }}
+              {% endautoescape %}
+
+              {% autoescape off %}
+              <h5 class="font-weight-600">How to Apply</h5>
+              <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+              {{ job.submission_guidelines }}
+              {% endautoescape %}
+
+
+              {% autoescape off %}
+
+              <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
+              <h5 class="font-weight-600">Submission Email:</h5>
+              {% if job.submission_email == None %}
+              <p></p>
+              {% else %}
+              {% autoescape off %}
+              {% if job.is_expired %}
+              <span style="background-color: #d20001;color:white;padding:5px;border-radius: 5px;">This job has been expired!</span>
+              {% else %}
+              <p>{{ job.submission_email }}
+              <p>
+
+                <a href="{% url 'apply' job.id job.jobs_slug %}" class="site-button" title="apply" style="color: white !important;"><i class="ti-check"></i> Apply</a>
+                {% endif %}
+                {% endautoescape %}
+                {% endif %}
+
+              {% endautoescape %}
+              <br><br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Job Detail -->
+
+  </div>
+</div>
+<!-- Content END-->
+{% endblock %}

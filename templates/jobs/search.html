@@ -1,0 +1,257 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta_data %}
+
+ <meta name="description" content="Jobsgroup.org is The Fastest Growing Jobs Portal in World Offering The Vacancies in United Nations, NGO, European Union">
+ <meta name="keywords" content="software engineer jobs, graphic designer careers, marketing manager positions, hiring sales representative, finance jobs, healthcare careers,
+ education positions, technology employment opportunities, New York City jobs, Los Angeles careers, remote jobs, management careers, part-time positions, jobs in undp,
+ jobs in un, un jobs, united nation jobs, jobs in canada">
+
+<meta property="og:image" content="{% static 'assets/images/logo.png' %}" />
+<meta property="og:title"         content="Jobs in | {{ where_keyword }}" />
+<meta property="og:image:alt" content="search page logo">
+<meta name="og:url" content="https://www.jobsgroup.org/jobs-by-location/{{ where_keyword }}">
+<meta name="og:title" content="Jobsgroup.org | Jobs in United Nations, NGO, European Union">
+<meta name="og:site_name" content="Jobsgroup.org">
+
+{% endblock %}
+
+{% load replace_string %}
+{% block styles %}
+<style>
+    .side-widget
+    {
+    background: #fff;
+    border-radius: 4px;
+    border: 1px solid #eceff3;
+    margin-bottom: 30px;
+    overflow: hidden;
+    color:black !important;
+    }
+    h4.side-widget-title
+    {
+        margin: 0;
+        text-align: left;
+        padding-left: 12px;
+        color: #fff;
+        font-size: 17px;
+        text-transform: uppercase;
+        line-height: 48px;
+    }
+    dl,
+    ul,
+    ol {
+        list-style-position: outside;
+        padding: 0;
+        font-size: 13px !important;
+    }
+    ul,
+    ol {
+        margin-bottom: 24px;
+    }
+    ul li,
+    ol li {
+        padding: 0;
+    }
+    dl {
+        margin-left: 0;
+        margin-bottom: 30px;
+    }
+    dl dd {
+        margin-bottom: 10px;
+    }
+</style>
+{% endblock %}
+{% block title %} Jobs in {{ where_keyword }} {% endblock %}
+{% block head %} 
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7962170340896214"
+     crossorigin="anonymous"></script>
+     
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-00NJC085NT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-00NJC085NT');
+</script>
+
+{% endblock %}
+
+{% block content %}
+<div class="page-content">
+  
+    <!-- Our Job -->
+    <div class="section-full bg-white content-inner-2">
+        <div class="container">
+            <div class="find-job-bx">
+                <p class="site-button button-sm">Find Jobs, Employment & Career Opportunities</p>
+
+                <form class="dezPlaceAni" action="{% url 'search' %}" method="GET">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" name="what" class="form-control" placeholder="Job Title, Keywords, or Phrase">
+                                    <div class="input-group-append">
+                                      <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="form-group">
+                                <div class="input-group">
+                                <select name="emp_type" class="form-control">
+                                    <option value="">
+                                        By Employment Type
+                                    </option>
+                                        <option value="Full Time">Full Time</option>
+                                        <option value="Part Time">Part Time</option>
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="form-group">
+                                <div class="input-group">
+                                <select name="category" class="form-control">
+                                    <option value="">
+                                        By Category
+                                    </option>
+                                    {% if categories_for_search %}
+                                    {% for cate in categories_for_search %}
+                                        <option value="{{ cate.slug_cate }}">{{ cate.category }}</option>
+                                    {% endfor %}
+                                    {% endif %}
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4">
+                            <div class="form-group">
+                                <div class="input-group">
+                                <select name="where" class="form-control">
+                                    <option value="">
+                                        By Location
+                                    </option>
+                                    {% for i in locations %}
+                                    {% if ',' not in i.job_location %}
+                                        <option value="{{ i.job_location }}">
+                                            {{ i.job_location }}
+                                        </option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+
+                        <div class="col-lg-2 col-md-6">
+                            <button type="submit" class="site-button btn-block">Find Job</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <hr>
+            <div class="d-flex job-title-bx section-head">
+                <div class="mr-auto">
+                    <h6 class="fw4 m-b0"><strong> <b>{{ count_rows }}</b></strong> jobs match your search</h5>
+                </div>
+            </div>
+   <!-- Our Job -->
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="row">
+
+                        
+                        
+                        {% if jobs_founded %}
+                        {% for job in jobs_founded %}
+
+                        <div class="col-md-6">
+                            <div class="m-b20" style="border-bottom: 1px dotted black;">
+                                <div>
+                                    
+                                    <span>
+                                        <a href="{% url '' job.id job.jobs_slug %}" class="job_link">
+                                            <h4 style="font-size: 19px;margin-bottom: 5px !important;color:#23527c;"> {{ job.job_title|replace_string|truncatechars:72 }}</h4>
+                                        </a>
+                                    </span>
+                                    <ul style="list-style-type: none;">
+                                        <li title="{{ job.organzation }}"><i class="fa fa-globe"></i> 
+                                            {% if job.posted_by.id %}
+                                            <a href="{% url 'companies' job.posted_by.id job.slug_cpn  %}" style="text-decoration:underline;">{{ job.organzation|truncatechars:55 }}</a>
+                                            {% else %}
+                                            <a href="{% url 'companies' job.slug_cpn  %}" style="text-decoration:underline;">{{ job.organzation|truncatechars:55 }}</a>
+                                            {% endif %}
+                                        </li>
+                                        <li title="Location"><i class="fa fa-map-marker"></i> 
+                                            
+                                            {% if ',' not in job.job_location %}
+                                            <span data-toggle="tooltip" data-placement="top" title="Location">{{ job.job_location }}</span>
+                                            {% else %}
+                                            <span data-toggle="tooltip" data-placement="top" title="Location">Multi Locations</span>
+                                            {% endif %}
+                                            | Close Date:  <span
+                                            style="color:red;" data-toggle="tooltip" data-placement="top" title="Expires on {{ job.close_date }}">{{ job.close_date }}
+                                            </span>
+                                            
+                                        </li>
+                                        <li><i class="fa fa-clock-o"></i> {{ job.whenpublished }}  
+                                        
+                                        {% now "Y-m-d" as todays_date %}
+                                        {% if job.job_date|date:"Y-m-d" == todays_date %}
+                                                <span style="background: #ff9800!important;" class="pull-right label label-warning rounded">New</span>
+                                        {% else %}
+                                        {% endif %}
+
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                        </div>
+                        {% endfor %}
+                        {% endif %} 
+                    </div>
+                    <div class="m-t30 ">
+                        <div class="d-flex ">
+                            {% if jobs_founded.has_previous %}
+                            <a class="site-button button-sm mr-auto" href="?page={{ jobs_founded.previous_page_number }}"><i class="ti-arrow-left"></i> Prev</a>
+                            {% endif %}
+                            {% if jobs_founded.has_next %}
+                            <a class="site-button button-sm" href="?page={{ jobs_founded.next_page_number }}">Next <i class="ti-arrow-right"></i></a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-md-4">
+                    <div class="sticky-top">
+                        <div class="candidates-are-sys m-b30">
+                            <div class="candidates-bx">
+                                <div  class="side-widget">
+                                    <h4 class="side-widget-title" style="background:#337ab7;">Advertisments</h4>
+
+                                    <!-- Ads -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <hr>
+              <!-- Multiplex ads after this comment -->
+
+        </div>
+    </div>
+    <!-- Our Job END -->
+</div>
+{% endblock %}
