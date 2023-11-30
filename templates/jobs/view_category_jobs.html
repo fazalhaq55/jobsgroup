@@ -109,15 +109,18 @@
                                                 <a href="{% url '' job.id job.jobs_slug %}" target="_blank">
                                                     <div class="d-flex m-b20">
                                                         <div class="job-post-company">
-                                                            
-
                                                             {% if not job.posted_by.company_image %}
                                                             {% if job.org_photo.photo %}
-                                                                <span><img src="{{ job.org_photo.photo.url }}"></span>
+                                                            <figure>
+                                                                <img src="{{ job.org_photo.photo.url }}">
+                                                                </figure>
                                                                 {% endif %}
                                                             {% endif %}
                                                             {% if job.posted_by.company_image %}
-                                                                    <span><img src="{{ job.posted_by.company_image.url }}"></span>
+    
+                                                                    <figure>
+                                                                        <img src="{{ job.posted_by.company_image.url }}">
+                                                                        </figure>
                                                             {% endif %}
                                                         </div>
                                                         <div class="job-post-info">

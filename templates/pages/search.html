@@ -192,7 +192,10 @@
                                                             {% endif %}
                                                         {% endif %}
                                                         {% if job.posted_by.company_image %}
-                                                                <span><img src="{{ job.posted_by.company_image.url }}"></span>
+
+                                                                <figure>
+                                                                    <img src="{{ job.posted_by.company_image.url }}">
+                                                                    </figure>
                                                         {% endif %}
                                                     </div>
                                                     <div class="job-post-info">
