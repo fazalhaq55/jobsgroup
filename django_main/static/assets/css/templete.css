@@ -771,6 +771,18 @@
 	top: 25px;
 	right: 25px;
 }
+
+figure {
+	display: flex;
+min-width: 70px;
+max-width: 70px;
+border: 1px solid #eeeeee;
+margin-bottom: 0px;
+min-height: 70px;
+align-items: center;
+padding: 5px;
+}
+
 .post-like:hover{
 	background-color: #337ab7;
 	color: #ffffff;

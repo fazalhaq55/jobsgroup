@@ -53,6 +53,7 @@
     dl dd {
         margin-bottom: 10px;
     }
+    
 </style>
 {% endblock %}
 
@@ -185,7 +186,9 @@
             
                                                         {% if not job.posted_by.company_image %}
                                                         {% if job.org_photo.photo %}
-                                                            <span><img src="{{ job.org_photo.photo.url }}"></span>
+                                                        <figure>
+                                                            <img src="{{ job.org_photo.photo.url }}">
+                                                            </figure>
                                                             {% endif %}
                                                         {% endif %}
                                                         {% if job.posted_by.company_image %}
