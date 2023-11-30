@@ -7,19 +7,7 @@
     
     <meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="JobsGroup.org stands as the rapidly expanding job platform in Afghanistan, presenting job opportunities across the entire nation">
-    <meta name="keywords" content="software engineer jobs, graphic designer careers, marketing manager positions, hiring sales representative, finance jobs, healthcare careers,
-    education positions, technology employment opportunities, remote jobs, management careers, part-time positions, jobs in undp,
-    jobs in un, un jobs, united nation jobs, jobs in kabul, jobs in nangarhar, jobs in herat, jobsgroup, jobs in afghanistan, jobsgroup jobs">
-
-    <meta property="og:image" content="{% static 'assets/images/favicon.png' %}" />
-    <meta property="og:image:alt" content="index page logo">
-    <meta name="og:url" content="https://jobsgroup.org/">
-    <meta name="og:title" content="Jobsgroup.org | Jobs in Afghanistan">
-    <meta name="og:site_name" content="Jobsgroup.org">
-        
-	<meta name="format-detection" content="telephone=no">
-	
+    {% block meta_data %} {% endblock %}       
 	<!-- FAVICONS ICON -->
 	<link rel="icon" href="{% static 'assets/images/favicon.ico' %}" type="image/x-icon" />
 	<link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/images/favicon.png' %}" />
