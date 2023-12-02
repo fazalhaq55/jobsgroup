@@ -1,5 +1,4 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, JsonResponse
 from jobs.models import Info
 from django.db.models import Count
 from django.db.models import Q
@@ -290,8 +289,3 @@ def contact_us(request):
     
     return render(request, "pages/contact_us.html")
     
-def plain_text_view(request):
-    file = open('/home/djangoadmin/pyapps/jobsgroup/templates/jobs/ads.txt', 'r')
-    content = file.read()
-    file.close()
-    return HttpResponse(content, content_type='text/plain')

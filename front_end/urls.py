@@ -13,5 +13,4 @@ urlpatterns = [
     path('companies/<int:id>/<str:slug>', views.slug_companies_id, name="companies"),
     path('search-company', views.search_for_company, name="search-company"),
     path('contact-us', views.contact_us, name="contact-us"),
-    path('ads.txt', views.plain_text_view, name='ads'),
 ]

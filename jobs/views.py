@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 from .models import Info
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.db.models import Count
 import datetime
 from django.db.models import Q
@@ -182,3 +182,10 @@ def apply(request,id, slug):
          return HttpResponseRedirect(link)
     else:             
         return render(request, 'jobs/apply.html',context)
+    
+
+def plain_text(request):
+    file = open('/home/djangoadmin/pyapps/jobsgroup/templates/jobs/ads.txt', 'r')
+    content = file.read()
+    file.close()
+    return HttpResponse(content, content_type='text/plain')
