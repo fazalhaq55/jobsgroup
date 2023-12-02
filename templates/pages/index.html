@@ -39,7 +39,6 @@
     dl dd {
         margin-bottom: 10px;
     }
-
 </style>
 {% endblock %}
 
@@ -47,16 +46,6 @@
 <meta name="google-adsense-account" content="ca-pub-8245638410583528">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8245638410583528"
      crossorigin="anonymous"></script>
-     
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-00NJC085NT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-00NJC085NT');
-</script>
 
 {% endblock %}
 
@@ -74,7 +63,7 @@
                             <div class="col-lg-4 col-md-4">
                                 <div class="form-group">
                                     <div class="input-group">
-                                        <input type="text" name="what" class="form-control" placeholder="Job Title, Keywords, or Phrase">
+                                        <input type="text" name="what" class="form-control" placeholder="Job Title or Keyword">
                                         <div class="input-group-append">
                                           <span class="input-group-text"><i class="fa fa-search"></i></span>
                                         </div>
@@ -147,7 +136,7 @@
         <div class="container">
             <div class="d-flex job-title-bx section-head">
                 <div class="mr-auto">
-                    <h4 class="m-b5">Vacancies in Afghanistan and other international organizations </h4>
+                    <h4 class="m-b5">All Available Vacancies in Afghanistan </h4>
                     <h6 class="fw4 m-b0">{{ jobs_count }} Available Jobs</h5>
                 </div>
 
@@ -161,7 +150,7 @@
                                 {% if jobs_founded %}
                                 {% for job in jobs_founded %}
                                 <li>
-                                    <a href="{% url '' job.id job.jobs_slug %}" target="_blank">
+                                    <a href="{% url '' job.id job.jobs_slug %}">
                                         <div class="d-flex m-b20">
                                             <div class="job-post-company">
                                                 {% if not job.posted_by.company_image %}
@@ -179,7 +168,7 @@
                                                         {% endif %}
                                             </div>
                                             <div class="job-post-info">
-                                                <h5>{{ job.job_title|replace_string|truncatechars:40 }}</h5>
+                                                <h6>{{ job.job_title|replace_string|truncatechars:40 }}</h6>
                                                 <ul>
                                                     <li data-toggle="tooltip" data-placement="top" title="{{ job.organzation }}"><i class="fa fa-map-marker"></i> {{ job.organzation|truncatechars:40 }}</li>
                                                     <li data-toggle="tooltip" data-placement="top" title="Location"><i class="fa fa-globe"></i> 
@@ -212,6 +201,13 @@
                                                 
                                             </div>
                                         </div>
+
+                                        {% now "Y-m-d" as todays_date %}
+                                        {% if job.job_date|date:"Y-m-d" == todays_date %}
+                                                <span class="post-like" style="border: none;"><span class="label label-warning rounded">New</span></span>
+                                    {% else %}
+                                    {% endif %}
+                                    
                                         <!-- <span class="post-like fa fa-heart-o"></span> -->
                                     </a>
                                 </li>
@@ -219,12 +215,30 @@
                                 {% endif %}    
                             </ul>
                             <div class="m-t30">
-                                <div class="d-flex">
-                                    {% if jobs.has_previous %}
-                                    <a class="site-button button-sm mr-auto" href="?page={{ jobs.previous_page_number }}"><i class="ti-arrow-left"></i> Prev</a>
+                                <div class="pagination">
+                                    {% if jobs_founded.has_previous %}
+                                    <li>
+                                        <a href="?page=1"> <i class="fa fa-angle-double-left"></i></a>
+                                        <a href="?page={{ jobs_founded.previous_page_number }}"> <i class="fa fa-angle-left"></i></a>
+                                    </li>
                                     {% endif %}
-                                    {% if jobs.has_next %}
-                                    <a class="site-button button-sm" href="?page={{ jobs.next_page_number }}">Next <i class="ti-arrow-right"></i></a>
+                                    {% for num in jobs_founded.paginator.page_range %}
+                                    {% if jobs_founded.number == num %}
+                                    <li class="active">
+                                        <a><strong>{{ num }}</strong></a>
+                                    </li>
+                                    {% elif num > jobs_founded.number|add:'-3' and num < jobs_founded.number|add:'3' %}
+                                    <li>
+                                        <a href="?page={{ num }}"> {{ num }}</a>
+                                    </li>
+                                    {% endif %}
+                                    {% endfor %}
+                
+                                    {% if jobs_founded.has_next %}
+                                    <li>
+                                        <a href="?page={{ jobs_founded.next_page_number }}"><i class="fa fa-angle-right"></i></a>
+                                        <a href="?page={{ jobs_founded.paginator.num_pages }}"><i class="fa fa-angle-double-right"></i></a>
+                                    </li>
                                     {% endif %}
                                 </div>
                             </div>
@@ -251,7 +265,7 @@
     </div>
     <!-- Our Job END -->
 
-    <div class="section-full job-categories content-inner-2 bg-white">
+    <div class="section-full content-inner-2 bg-white">
         <div class="container">
             <div class="section-head d-flex head-counter clearfix" style="margin-bottom: 10px !important;">
                 <div class="mr-auto">
@@ -293,7 +307,7 @@
                             <ul class="list-2 w10 list-line">
                                 {% for i in locations %}
                                 {% if ',' not in i.job_location %}
-                                    <li class="col-md-4"><a href="{% url 'jobs-by-location' i.job_location|lower %}">{{ i.job_location }} <span style="color:#6aca00;">({{ i.total }} Jobs)</span></a></li>
+                                    <li class="col-md-4"><a href="{% url 'jobs-by-location' i.job_location|lower %}">{{ i.job_location }} <span style="color:black;">({{ i.total }} Jobs)</span></a></li>
                                 {% endif %}
                                 {% endfor %}
                             </ul>
@@ -304,7 +318,7 @@
                             <ul class="list-2 w10 list-line">
                                 {% if categories  %}
                                 {% for cate in categories %}
-                                    <li class="col-md-4">   <a href="{% url 'category' cate.slug_cate %}">{{ cate.category }} <span style="color:#6aca00;">({{ cate.total }})</span></a></li>
+                                    <li class="col-md-4">   <a href="{% url 'category' cate.slug_cate %}">{{ cate.category }} <span style="color:black;">({{ cate.total }})</span></a></li>
                                 {% endfor %}
                                 {% endif %}
                             </ul>
@@ -328,9 +342,9 @@
                                 {% for i in organization %}
                                 <li class="col-md-4">
                                     {% if i.posted_by %}
-                                    <a href="{% url 'companies' i.posted_by i.slug_cpn  %}">{{ i.organzation|truncatechars:30 }} <span style="color:#6aca00;">({{ i.total }} Jobs)</span></a>
+                                    <a href="{% url 'companies' i.posted_by i.slug_cpn  %}">{{ i.organzation|truncatechars:30 }} <span style="color: black;">({{ i.total }} Jobs)</span></a>
                                     {% else %}
-                                    <a href="{% url 'companies' i.slug_cpn  %}">{{ i.organzation|truncatechars:30 }} <span style="color:#6aca00;">({{ i.total }} Jobs)</span></a>
+                                    <a href="{% url 'companies' i.slug_cpn  %}">{{ i.organzation|truncatechars:30 }} <span style="color: black;">({{ i.total }} Jobs)</span></a>
                                     {% endif %}
                                 </li>
                             {% endfor %}
@@ -353,9 +367,6 @@
                   </div>
                   
             </div>
-            <hr>
-              <!-- Multiplex ads after this comment -->
-                
         </div>
 
     </div>

@@ -88,17 +88,6 @@
 <meta name="google-adsense-account" content="ca-pub-8245638410583528">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8245638410583528"
      crossorigin="anonymous"></script>
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-00NJC085NT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-00NJC085NT');
-</script>
-
 {% endblock %}
 
 
@@ -162,10 +151,10 @@
                             {% if jobs_founded %}
                             {% for job in jobs_founded %}
                             <li>
-                                <a href="{% url '' job.id job.jobs_slug %}" target="_blank">
+                                <a href="{% url '' job.id job.jobs_slug %}">
                                     <div class="d-flex m-b20">
                                         <div class="job-post-info">
-                                            <h5>{{ job.job_title|replace_string|truncatechars:40 }}</h5>
+                                            <h6>{{ job.job_title|replace_string|truncatechars:40 }}</h6>
                                             <ul>
                                                 <li data-toggle="tooltip" data-placement="top" title="{{ job.organzation }}"><i class="fa fa-map-marker"></i> {{ job.organzation|truncatechars:40 }}</li>
                                                 <li data-toggle="tooltip" data-placement="top" title="Location"><i class="fa fa-globe"></i> 
@@ -198,6 +187,12 @@
                                             
                                         </div>
                                     </div>
+
+                                    {% now "Y-m-d" as todays_date %}
+                                    {% if job.job_date|date:"Y-m-d" == todays_date %}
+                                            <span class="post-like" style="border: none;"><span class="label label-warning rounded">New</span></span>
+                                    {% else %}
+                                    {% endif %}
                                     <!-- <span class="post-like fa fa-heart-o"></span> -->
                                 </a>
                             </li>
