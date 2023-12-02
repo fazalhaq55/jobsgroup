@@ -24,10 +24,10 @@ def index(request):
     record = Info.objects.filter(is_expired=False, status = 'approved')
     UserObj = UserProfile.objects.all()
 
-    for i in record:
-        if (i.close_date < today):
-            i.is_expired = True
-            i.save()
+    # for i in record:
+    #     if (i.close_date < today):
+    #         i.is_expired = True
+    #         i.save()
             
         
   
