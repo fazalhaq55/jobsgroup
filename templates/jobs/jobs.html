@@ -216,13 +216,12 @@ crossorigin="anonymous"></script>
                                                         </span>
                                                         
                                                     </div>
-                                                </div>
-
-                                                {% now "Y-m-d" as todays_date %}
-                                                {% if job.job_date|date:"Y-m-d" == todays_date %}
-                                                        <span class="post-like" style="border: none;"><span class="label label-warning rounded">New</span></span>
-                                                {% else %}
-                                                {% endif %}
+                                                    {% now "Y-m-d" as todays_date %}
+                                                    {% if job.job_date|date:"Y-m-d" == todays_date %}
+                                                            <span style="border: none;"><span class="label label-warning rounded">New</span></span>
+                                                    {% else %}
+                                                    {% endif %}
+                                            </div>
                                                 <!-- <span class="post-like fa fa-heart-o"></span> -->
                                             </a>
                                         </li>
