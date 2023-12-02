@@ -291,7 +291,7 @@ def contact_us(request):
     return render(request, "pages/contact_us.html")
     
 def plain_text_view(request):
-    file = open('/home/djangoadmin/pyapps/wazifaha/templates/pages/ads.txt', 'r')
+    file = open('/home/djangoadmin/pyapps/jobsgroup/templates/pages/ads.txt', 'r')
     content = file.read()
     file.close()
     return HttpResponse(content, content_type='text/plain')
