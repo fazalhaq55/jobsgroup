@@ -17,12 +17,7 @@ def jobs(request):
     
     myDate = datetime.date.today()
     today = myDate.strftime("%Y-%m-%d")
-    record = Info.objects.filter(is_expired=False, status = 'approved')
-    # for i in record:
-    #     if (i.close_date < today):
-    #         i.is_expired = True
-    #         i.save()
-
+   
     jobs = Info.objects.order_by('-activation_date','-id').filter(is_expired=False, status = 'approved')
     locations = Info.objects.filter(is_expired=False, status = 'approved').values('job_location').annotate(total = Count('job_location')).order_by('-total')
     categories = Info.objects.filter(is_expired=False, status = 'approved').values('category', 'slug_cate').annotate(total = Count('category')).order_by('-total')[:30]

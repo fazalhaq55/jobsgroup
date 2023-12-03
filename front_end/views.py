@@ -20,15 +20,8 @@ def index(request):
 
     myDate = datetime.date.today()
     today = myDate.strftime("%Y-%m-%d")
-    record = Info.objects.filter(is_expired=False, status = 'approved')
-    UserObj = UserProfile.objects.all()
-
-    # for i in record:
-    #     if (i.close_date < today):
-    #         i.is_expired = True
-    #         i.save()
-            
-        
+ 
+    UserObj = UserProfile.objects.all()        
   
     # END DELETING
     org = Info.objects.filter(is_expired=False, status = 'approved').values('organzation','slug_cpn','posted_by').annotate(total = Count('slug_cpn')).order_by('-total')[:30]
