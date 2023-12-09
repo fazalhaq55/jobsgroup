@@ -165,68 +165,77 @@
                                     <ul class="post-job-bx">
                                         {% if jobs_founded %}
                                         {% for job in jobs_founded %}
-                                        <li>
-                                            <a href="{% url '' job.id job.jobs_slug %}">
-                                                <div class="d-flex m-b20">
-                                                    <div class="job-post-company">
-                                                        
-            
-                                                        {% if not job.posted_by.company_image %}
-                                                        {% if job.org_photo.photo %}
-                                                        <figure>
-                                                            <img src="{{ job.org_photo.photo.url }}">
-                                                            </figure>
-                                                            {% endif %}
-                                                        {% endif %}
-                                                        {% if job.posted_by.company_image %}
-
-                                                                <figure>
-                                                                    <img src="{{ job.posted_by.company_image.url }}">
-                                                                    </figure>
-                                                        {% endif %}
-                                                    </div>
-                                                    <div class="job-post-info">
-                                                        <h6>{{ job.job_title|replace_string|truncatechars:40 }}</h6>
-                                                        <ul>
-                                                            <li data-toggle="tooltip" data-placement="top" title="{{ job.organzation }}"><i class="fa fa-map-marker"></i> {{ job.organzation|truncatechars:40 }}</li>
-                                                            <li data-toggle="tooltip" data-placement="top" title="Location"><i class="fa fa-globe"></i> 
-                                                                {% if ',' not in job.job_location %}
-                                                                    <span data-toggle="tooltip" data-placement="top" title="Location">{{ job.job_location }}</span>
-                                                                {% else %}
-                                                                <span data-toggle="tooltip" data-placement="top" title="Location">Multi Locations</span>
+                                        <li class="_li">
+                                  
+                                            <div class="d-flex m-b20">
+                                                <a href="{% url '' job.id job.jobs_slug %}">
+                                                <div class="job-post-company">
+                                                    {% if not job.posted_by.company_image %}
+                                                            {% if job.org_photo.photo %}
+                                                            <figure>
+                                                                <img src="{{ job.org_photo.photo.url }}">
+                                                                </figure>
                                                                 {% endif %}
-                                                            </li>
-                                                            <li><i class="fa fa-clock-o"></i> {{ job.whenpublished }}</li>
-                                                        </ul>
-                                                    </div>
+                                                            {% endif %}
+                                                            {% if job.posted_by.company_image %}
+    
+                                                                    <figure>
+                                                                        <img src="{{ job.posted_by.company_image.url }}">
+                                                                        </figure>
+                                                            {% endif %}
                                                 </div>
-                                                <div class="d-flex">
-                                                    <div class="job-time mr-auto">                                                    
-                                                        {% if job.no_of_jobs > '1' %}
-                                                        <span style="text-transform:capitalize !important;">{{ job.no_of_jobs }} Vacancies</span>
-                                                        {% endif %}
-                
-                                                        {% if job.gender == 'Male' %}
-                                                        <span style="text-transform:capitalize !important;"> {{ job.gender }} <i class="fa fa-male"></i></span>
-                                                        {% endif %}
-                                                        {% if job.gender == 'Female' %}
-                                                        <span style="text-transform:capitalize !important;"> {{ job.gender }} <i class="fa fa-female"></i></span>
-                                                        {% endif %}
-                
-                                                        <span style="text-transform:capitalize !important;" data-toggle="tooltip" data-placement="top" title="Employment Type">
-                                                            <i class="fa fa-bookmark-o"></i> {{ job.emp_type }}
-                                                        </span>
-                                                        
-                                                    </div>
-                                                    {% now "Y-m-d" as todays_date %}
-                                                    {% if job.job_date|date:"Y-m-d" == todays_date %}
-                                                            <span style="border: none;"><span class="label label-warning rounded">New</span></span>
-                                                    {% else %}
-                                                    {% endif %}
+                                                </a>
+                                                <div class="job-post-info">
+                                                    <a href="{% url '' job.id job.jobs_slug %}">
+                                                    <h6>{{ job.job_title|replace_string|truncatechars:40 }}</h6>
+                                                    </a>
+                                                    <ul>
+                                                        <li data-toggle="tooltip" data-placement="top" title="{{ job.organzation }}"><i class="fa fa-map-marker"></i> 
+                                                            
+                                                            {% if job.posted_by.id %}
+                                                            <a href="{% url 'companies' job.posted_by.id job.slug_cpn  %}" style="text-decoration:underline;">{{ job.organzation|truncatechars:40 }}</a>
+                                                            {% else %}
+                                                            <a href="{% url 'companies' job.slug_cpn  %}" style="text-decoration:underline;">{{ job.organzation|truncatechars:40 }}</a>
+                                                            {% endif %}
+                                                            
+                                                        </li>
+                                                        <li data-toggle="tooltip" data-placement="top" title="Location"><i class="fa fa-globe"></i> 
+                                                            {% if ',' not in job.job_location %}
+                                                                <span data-toggle="tooltip" data-placement="top" title="Location">{{ job.job_location }}</span>
+                                                            {% else %}
+                                                            <span data-toggle="tooltip" data-placement="top" title="Location">Multi Locations</span>
+                                                            {% endif %}
+                                                        </li>
+                                                        <li><i class="fa fa-clock-o"></i> {{ job.whenpublished }}</li>
+                                                    </ul>
+                                                </div>
                                             </div>
-                                                <!-- <span class="post-like fa fa-heart-o"></span> -->
-                                            </a>
-                                        </li>
+                                            <div class="d-flex">
+                                                <div class="job-time mr-auto">                                                    
+                                                    {% if job.no_of_jobs > '1' %}
+                                                    <span style="text-transform:capitalize !important;">{{ job.no_of_jobs }} Vacancies</span>
+                                                    {% endif %}
+            
+                                                    {% if job.gender == 'Male' %}
+                                                    <span style="text-transform:capitalize !important;"> {{ job.gender }} <i class="fa fa-male"></i></span>
+                                                    {% endif %}
+                                                    {% if job.gender == 'Female' %}
+                                                    <span style="text-transform:capitalize !important;"> {{ job.gender }} <i class="fa fa-female"></i></span>
+                                                    {% endif %}
+            
+                                                    <span style="text-transform:capitalize !important;" data-toggle="tooltip" data-placement="top" title="Employment Type">
+                                                        <i class="fa fa-bookmark-o"></i> {{ job.emp_type }}
+                                                    </span>
+                                                </div>
+                                                {% now "Y-m-d" as todays_date %}
+                                                        {% if job.job_date|date:"Y-m-d" == todays_date %}
+                                                                <span style="border: none;"><span class="label label-warning rounded">New</span></span>
+                                                        {% else %}
+                                                        {% endif %}
+                                                </div>
+                                        
+                                            <!-- <span class="post-like fa fa-heart-o"></span> -->
+                                    </li>
                                         {% endfor %}
                                         {% endif %}    
                                     </ul>

@@ -709,7 +709,7 @@
 .post-job-bx ul li i{
 	margin-right:5px;
 }
-.post-job-bx a{
+.post-job-bx ._li{
 	padding:17px;
 	background-color:#fff;
 	border-left: 2px solid #e1e7ff;
@@ -718,7 +718,7 @@
 	display: block;
 	position:relative;
 }
-.post-job-bx a:hover{
+.post-job-bx ._li:hover{
 	border-color:#337ab7;
 }
 .post-job-bx > li{

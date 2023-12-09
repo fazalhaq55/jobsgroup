@@ -147,11 +147,12 @@
                         <ul class="post-job-bx">
                             {% if jobs_founded %}
                             {% for job in jobs_founded %}
-                            <li>
-                                <a href="{% url '' job.id job.jobs_slug %}">
-                                    <div class="d-flex m-b20">
-                                        <div class="job-post-info">
+                            <li class="_li">
+                                <div class="d-flex m-b20">
+                                    <div class="job-post-info">
+                                            <a href="{% url '' job.id job.jobs_slug %}">
                                             <h6>{{ job.job_title|replace_string|truncatechars:40 }}</h6>
+                                            </a>
                                             <ul>
                                                 <li data-toggle="tooltip" data-placement="top" title="{{ job.organzation }}"><i class="fa fa-map-marker"></i> {{ job.organzation|truncatechars:40 }}</li>
                                                 <li data-toggle="tooltip" data-placement="top" title="Location"><i class="fa fa-globe"></i> 
@@ -190,7 +191,7 @@
                                         {% endif %}
                                 </div>
                                     <!-- <span class="post-like fa fa-heart-o"></span> -->
-                                </a>
+
                             </li>
                             {% endfor %}
                             {% endif %}    
