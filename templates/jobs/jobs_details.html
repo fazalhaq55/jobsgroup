@@ -110,6 +110,19 @@
             </div>
           </div>
           <div class="col-lg-8">
+
+            <h3 class="m-t0 m-b10 font-weight-700 title-head">
+              <a href="#" class="text-secondry m-r30" style="color: black !important;">{{ job.job_title|replace_string }}</a>
+            </h3>
+            
+            <ul class="job-info">
+              <li><strong>Organization:</strong> {{ job.organzation }}</li><br>
+              <li><strong>Location :</strong> {{ job.job_location }}</li><br>
+              <li><strong>Close Date :</strong> {{ job.close_date }}</li><br>
+              
+            </ul>
+            <hr>
+
             <div class="job-info-box">
 
               {% autoescape off %}

@@ -52,12 +52,12 @@
 {% block content %}
 <div class="page-content">
     <!-- Section Banner -->
-    <div class="dez-bnr-inr dez-bnr-inr-md" style="background-image:url({% static 'assets/images/main-slider/slide2.jpg' %});">
+    <div class="dez-bnr-inr dez-bnr-inr-md" style="">
         <div class="container">
             <div class="dez-bnr-inr-entry align-m ">
                 <div class="find-job-bx">
                     <p class="site-button button-sm">Find Jobs, Employment & Career Opportunities</p>
-                    <h2>Search Between More Than <br/> <span class="text-primary">{{ jobs_count }}</span> Open Jobs.</h2>
+                    <h2><span class="text-primary">{{ jobs_count }}</span> Jobs Available</h2>
                     <form class="dezPlaceAni" action="{% url 'search' %}" method="GET">
                         <div class="row">
                             <div class="col-lg-4 col-md-4">
@@ -70,6 +70,23 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="col-lg-4 col-md-4">
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <select name="category" class="form-control">
+                                            <option value="">
+                                                By Category
+                                            </option>
+                                            {% if categories_for_search %}
+                                            {% for cate in categories_for_search %}
+                                            <option value="{{ cate.slug_cate }}">{{ cate.category }}</option>
+                                        {% endfor %}
+                                        {% endif %}
+                                    </select>
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="col-lg-4 col-md-4">
                                 <div class="form-group">
                                     <div class="input-group">
@@ -86,25 +103,8 @@
                             <div class="col-lg-4 col-md-4">
                                 <div class="form-group">
                                     <div class="input-group">
-                                    <select name="category" class="form-control">
-                                        <option value="">
-                                            By Category
-                                        </option>
-                                        {% if categories_for_search %}
-                                        {% for cate in categories_for_search %}
-                                            <option value="{{ cate.slug_cate }}">{{ cate.category }}</option>
-                                        {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-4">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                    <select name="where" class="form-control">
-                                        <option value="">
+                                        <select name="where" class="form-control">
+                                            <option value="">
                                             By Location
                                         </option>
                                         {% for i in locations %}
@@ -180,6 +180,7 @@
                                                         {% else %}
                                                         <a href="{% url 'companies' job.slug_cpn  %}" style="text-decoration:underline;">{{ job.organzation|truncatechars:40 }}</a>
                                                         {% endif %}
+
                                                     </li>
                                                     <li data-toggle="tooltip" data-placement="top" title="Location"><i class="fa fa-globe"></i> 
                                                         {% if ',' not in job.job_location %}
