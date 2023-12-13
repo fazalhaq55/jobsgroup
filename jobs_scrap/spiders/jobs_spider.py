@@ -32,6 +32,7 @@ class JobsSpiderSpider(CrawlSpider):
         return request
 
     def parse_request(self, response):
+        
         item = JobsScrapItem()
         br = '<br>'
         breakline = ','

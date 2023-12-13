@@ -9,6 +9,7 @@ from django.utils import timezone
 from bidi.algorithm import get_display
 import arabic_reshaper
 from unidecode import unidecode
+import re
 
 def custom_slugify(text):
 # Reshape the Arabic text to properly connect Arabic characters
@@ -23,7 +24,8 @@ class JobsScrapPipeline(object):
 
 
     def process_item(self, item, spider):
-
+        
+        persian_pattern = re.compile(r'[\u0600-\u06FF\uFB8A\u067E\u0686\u06AF\u200C\u200F]+')
         urls = Info.objects.values_list('url', flat=True).filter(~Q(url=None))
         # fetch urls
         for i in urls:
@@ -32,6 +34,15 @@ class JobsScrapPipeline(object):
             # here we check for url field value in response.url 
             # if exist in db just drop that item
         else:
+            
+            for i in item['job_title']:
+                if persian_pattern.search(i):
+                    raise DropItem()
+                
+            for i in item['job_requirements']:
+                if persian_pattern.search(i):
+                    raise DropItem()
+                
             j = '\t\n'.join(item['job_descriptions'])
             item['job_descriptions'] = j
             j_r = '\t\n'.join(item['job_requirements'])
