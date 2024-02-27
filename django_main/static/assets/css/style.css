@@ -2928,7 +2928,7 @@ blockquote:before {
 ---------------------------------------------------------------*/
 
 .main-bar {
-    background: #FFFFFF;
+    background: #2784F4;
     width: 100%;
     position: relative;
 }
@@ -3005,7 +3005,7 @@ blockquote:before {
 }
 .header-nav .nav > li > a {
     border-radius: 0px;
-    color: #000;
+    color: #ffff;
     font-size: 15px;
     padding: 30px 12px;
     cursor: pointer;
@@ -11008,7 +11008,7 @@ footer .widget_services ul li {
     opacity: 0.85;
 }
 .footer-bottom {
-    background-color:#2d6b9f;
+    background-color:#2784F4;
     padding: 25px 0;
     font-size: 14px;
 	text-transform:capitalize !important;

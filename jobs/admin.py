@@ -4,8 +4,7 @@ from .models import Info
 from django.shortcuts import render
 
 class InfoAdmin(admin.ModelAdmin):
-    def save_model(self, request, obj, form, change):
-       obj.approve_post()
+
     # def is_published_n(self, obj):
     #     if obj.job_location == "Kabul":
     #         id = obj.id
@@ -15,15 +14,15 @@ class InfoAdmin(admin.ModelAdmin):
     #         n_id = obj.id
     #         record = Info.objects.filter(pk=n_id).update(is_published=False)
             # return obj.is_published
+        
+    list_display = ('id', 'job_title','slug_cpn','is_expired')
     
-    list_display = ('id','meta_tag', 'job_title','salary','education','organzation','is_expired','status', 'activation_date')
-    
-    list_display_links = ('id','job_title','meta_tag')
-    list_filter = ('job_date','is_expired')
-    list_editable = ('is_expired','status',)
-    search_fields = ('job_title','job_location','vacancy_number','organzation')
-    list_per_page = 50
-    exclude = ('favourite','url')
+    list_display_links = ('id','job_title')
+    list_filter = ('job_date','is_expired','work_from_home')
+    list_editable = ('is_expired',)
+    search_fields = ('job_title','job_location','organzation')
+    list_per_page = 500
+    exclude = ('url',)
 
     # TO MAKE CUSTOM URL AND CUSTOM VIEW FUNCTION
     # def get_urls(self):

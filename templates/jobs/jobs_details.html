@@ -15,7 +15,8 @@
 
 <meta name="og:site_name" content="Jobsgroup.org | Jobs in Afghanistan">
 <meta name="og:description" content="{{ job.organzation }}">
-<meta name="keywords" content="jobs in {{job.organzation}}, {{ job.job_title|replace_string }}, jobs in {{ job.job_location }}, jobs in {{ job.category }}, jobs for {{ job.education }}">
+<meta name="keywords"
+  content="jobs in {{job.organzation}}, {{ job.job_title|replace_string }}, jobs in {{ job.job_location }}, jobs in {{ job.category }}, jobs for {{ job.education }}">
 
 <meta property="og:image" content="
 {% if job.org_photo.vector_photo %}
@@ -51,10 +52,10 @@
     padding: 0px !important;
     margin-top: 15px;
   }
+
   .job-info-box a {
     color: #0089ff !important;
   }
-  
 </style>
 {% endblock %}
 
@@ -63,7 +64,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-YXSEKCK7CV"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag() { dataLayer.push(arguments); }
   gtag('js', new Date());
 
   gtag('config', 'G-YXSEKCK7CV');
@@ -71,7 +72,7 @@
 
 <meta name="google-adsense-account" content="ca-pub-8245638410583528">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8245638410583528"
-     crossorigin="anonymous"></script>
+  crossorigin="anonymous"></script>
 
 {% endblock %}
 
@@ -83,108 +84,222 @@
   <!-- contact area -->
   <div class="content-block">
     <!-- Job Detail -->
-    <div class="section-full content-inner-1">
+    <div class="section-full content-inner-1" style="background-color: #f5f6f7;">
       <div class="container">
-        <div class="row">
-          <div class="col-lg-4">
-            <div class="sticky-top">
-              <div class="row">
-                <div class="col-lg-12 col-md-6">
-                  <div class="widget bg-white p-lr20 p-t20  widget_getintuch radius-sm">
-                    <h4 class="text-black font-weight-700 p-t10 m-b15">Job Details</h4>
-                    <ul>
-                      <li><strong class="font-weight-700 text-black">Views</strong><span class="text-black-light"> {{ job.views}} </span></li>
-                      <li><strong class="font-weight-700 text-black">Position Title</strong><span class="text-black-light"> {{ job.job_title|replace_string }} </span></li>
-                      <li><strong class="font-weight-700 text-black">Location</strong><span class="text-black-light"> {{ job.job_location }} </span></li>
-                      <li><strong class="font-weight-700 text-black">City</strong><span class="text-black-light"> {{ job.city }} </span></li>
-                      <li><strong class="font-weight-700 text-black">Organization</strong><span class="text-black-light"> {{ job.organzation }} </span></li>
-                      <li><strong class="font-weight-700 text-black">Vacancy Number</strong><span class="text-black-light"> {{ job.vacancy_number }} </span></li>
-                      <li><strong class="font-weight-700 text-black">No of Jobs</strong><span class="text-black-light"> {{ job.no_of_jobs }} </span></li>
-                      <li><strong class="font-weight-700 text-black">Salary</strong><span class="text-black-light"> {{ job.salary }} </span></li>
-                      <li><strong class="font-weight-700 text-black">Nationality</strong><span class="text-black-light"> {{ job.nationality }} </span></li>
-                      <li><strong class="font-weight-700 text-black">Category</strong><span class="text-black-light"> {{ job.category }} </span></li>
-                      <li><strong class="font-weight-700 text-black">Employment Type</strong><span class="text-black-light"> {{ job.emp_type }} </span></li>
-                      <li><strong class="font-weight-700 text-black">Year of Experience</strong><span class="text-black-light"> {{ job.years_of_experience }} </span></li>
-                      <li><strong class="font-weight-700 text-black">Contract Duration</strong><span class="text-black-light"> {{ job.contract_duration }} </span></li>
-                      <li><strong class="font-weight-700 text-black">Gender</strong><span class="text-black-light"> {{ job.gender }} </span></li>
-                      <li><strong class="font-weight-700 text-black">Education</strong><span class="text-black-light"> {{ job.education }} </span></li>
-                      <li><strong class="font-weight-700 text-black">Close Date</strong>
-                        <span class="text-black-light">
-                          {{ job.close_date }}
-                        </span>
-                      </li>
+
+        <div class="dez-bnr-inr-entry align-m" style="display: contents;">
+          <div class="find-job-bx">
+              <form class="dezPlaceAni" action="{% url 'search' %}" method="GET">
+                  <div class="row">
+                      <div class="col-lg-4 col-md-4">
+                          <div class="form-group">
+                              <div class="input-group">
+                                  <input type="text" name="what" class="form-control" placeholder="Job Title or Keyword">
+                                  <div class="input-group-append">
+                                    <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-lg-4 col-md-4">
+                          <div class="form-group">
+                              <div class="input-group">
+                                  <select name="category" class="form-control">
+                                      <option value="">
+                                          By Category
+                                      </option>
+                                      {% if categories_for_search %}
+                                      {% for cate in categories_for_search %}
+                                      {% if cate.category != '' %}
+                                      <option value="{{ cate.slug_cate }}">
+                                          {{ cate.category }}</option>
+                                      {% else %}
+                                          
+                                          {% endif %}
+
+                                  {% endfor %}
+                                  {% endif %}
+                              </select>
+                              </div>
+                          </div>
+                      </div>
+
+                      <div class="col-lg-4 col-md-4">
+                          <div class="form-group">
+                              <div class="input-group">
+                              <select name="emp_type" class="form-control">
+                                  {% if emp_type %}
+                                      {% for i in emp_type %}
+                                          {% if i.emp_type != '--' %}
+                                          <option value="{{ i.emp_type }}">{{ i.emp_type }}</option>
+                                          {% endif %}
+                                      {% endfor %}
+                                  {% endif %}
+                              </select>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="col-lg-4 col-md-4">
+                          <div class="form-group">
+                              <div class="input-group">
+                                  <select name="where" class="form-control">
+                                      <option value="">
+                                      By Location
+                                  </option>
+                                  {% for i in locations %}
+                                  {% if ',' not in i.city %}
+                                      <option value="{{ i.city }}">
+                                          {{ i.city }}
+                                      </option>
+                                  {% endif %}
+                                  {% endfor %}
+                              </select>
+                              </div>
+                          </div>
+                      </div>
+                      
+
+
+                      <div class="col-lg-2 col-md-6">
+                          <button type="submit" class="site-button btn-block">Find Job</button>
+                      </div>
                   </div>
-                </div>
-              </div>
-            </div>
+              </form>
           </div>
-          <div class="col-lg-8">
-
-            <h3 class="m-t0 m-b10 font-weight-700 title-head">
-              <a href="#" class="text-secondry m-r30" style="color: black !important;">{{ job.job_title|replace_string }}</a>
-            </h3>
-            
-            <ul class="job-info">
-              <li><strong>Organization:</strong> {{ job.organzation }}</li><br>
-              <li><strong>Location :</strong> {{ job.job_location }}</li><br>
-              <li><strong>Close Date :</strong> {{ job.close_date }}</li><br>
-              
-            </ul>
-            <hr>
-
-            <div class="job-info-box">
-
-              {% autoescape off %}
-              <h5 class="font-weight-600">About Organization</h5>
-              <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
-              {{ job.About_description }}
-              {% endautoescape %}
-
-
-              {% autoescape off %}
-              <h5 class="font-weight-600">Job Description</h5>
-              <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
-              {{ job.job_descriptions }}
-              {% endautoescape %}
-
-              {% autoescape off %}
-              <h5 class="font-weight-600">Job Requirements</h5>
-              <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
-              {{ job.job_requirements }}
-              {% endautoescape %}
-
-              {% autoescape off %}
-              <h5 class="font-weight-600">How to Apply</h5>
-              <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
-              {{ job.submission_guidelines }}
-              {% endautoescape %}
-
-
-              {% autoescape off %}
-
-              <div class="dez-divider divider-2px bg-gray-dark mb-4 mt-0"></div>
-              <h5 class="font-weight-600">Submission Email:</h5>
-              {% if job.submission_email == None %}
-              <p></p>
-              {% else %}
-              {% autoescape off %}
-              {% if job.is_expired %}
-              <span style="background-color: #d20001;color:white;padding:5px;border-radius: 5px;">This job has been expired!</span>
-              {% else %}
-              <p>{{ job.submission_email }}
-              <p>
-
-                <a href="{% url 'apply' job.id job.jobs_slug %}" class="site-button" title="apply" style="color: white !important;"><i class="ti-check"></i> Apply</a>
-                {% endif %}
-                {% endautoescape %}
-                {% endif %}
-
-              {% endautoescape %}
-              <br><br>
-            </div>
-          </div>
-        </div>
       </div>
+
+      
+        <div class="row">
+            <div class="col-md-9 col-sm-12">
+                <div class="widget bg-white p-lr20 p-t20 radius-sm">
+                    <h5 style="color:#2d6b9f!important;">{{ job.job_title }}</h5>
+                    <h5 style="color:#35434e; font-size: 12px !important;border-left:none; background:#ebf6ff;padding: 10px;">
+                        <i class="fa fa-calendar"></i> {{ job.close_date }} &nbsp; &nbsp;&nbsp; &nbsp; <i class="fa fa-map-marker"></i>
+                        {{ job.job_location }} &nbsp;&nbsp;&nbsp; &nbsp; <i class="fa fa-clock-o"></i>
+                        {{ job.emp_type }} &nbsp; &nbsp;&nbsp; &nbsp; <i class="fa fa-eye"></i> {{ job.views }}
+                    </h5>
+    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <table class="table table-striped table-bordered">
+                              <tbody>
+                                <tr>
+                                  <th>Job Location:</th>
+                                  <td>{{ job.job_location }}</td>
+                                </tr>
+
+                                <tr>
+                                  <th>Category:</th>
+                                  <td>{{ job.category }}</td>
+                                </tr>
+                                <tr>
+                                  <th>Employment Type:</th>
+                                  <td>{{ job.emp_type }}</td>
+                                </tr>
+              
+                                <tr>
+                                  <th>Salary:</th>
+                                  <td>
+                                    {% if job.salary == None %}
+              
+                                    {% else %}
+                                    {{ job.salary }}
+                                    {% endif %}
+                                  </td>
+                                </tr>
+              
+                                <tr>
+                                  <th>Company Industry:</th>
+                                  <td>
+                                    {{ job.company_industry }}
+                                  </td>
+                                </tr>
+              
+                                <tr>
+                                  <th>Company Type:</th>
+                                  <td>{{ job.company_type }}</td>
+                                </tr>
+                              </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-6">
+                            <table class="table table-striped table-bordered">
+                              <tbody>
+
+                                <tr>
+                                  <th>Work From Home:</th>
+                                  <td> 
+
+                                    {% if job.work_from_home == True %}
+                                      <label class="badge badge-success">Yes</label>
+                                    {% else %}
+                                    <label class="badge badge-danger">No</label>
+                                    {% endif %}
+                                    
+
+                                  </td>
+                                </tr>
+
+                                <tr>
+                                  <th>No. Of Jobs:</th>
+                                  <td>{{ job.no_of_jobs }}</td>
+                                </tr>
+
+                                <tr>
+                                  <th>City:</th>
+                                  <td>
+                                    {% if job.city == None %}
+              
+                                    {% else %}
+                                    {{ job.city }}
+                                    {% endif %}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <th>Organization:</th>
+                                  <td>{{ job.organzation }}</td>
+                                </tr>
+                                <tr>
+                                  <th>Close date:</th>
+                                  <td>{{ job.close_date }}</td>
+                                </tr>
+              
+                              </tbody>
+                            </table>
+                        </div>
+                    </div>
+                     <br><br>
+                    <div class="row row-bottom mrg-0 data" style="padding: 20px !important;">
+                      {% autoescape off %}
+                      <h5> Job Descriptions: </h5>
+                      <div dir="{{ job.job_descriptions|bidi }}">
+                          {{ job.job_descriptions }}
+                      </div>
+                      {% endautoescape %}
+                    </div>
+
+                    <div class="row row-bottom mrg-0 data" style="padding: 20px !important;">
+                      {% autoescape off %}
+                      <h5> Job Requirements:</h5>
+                      <div dir="{{ job.job_requirements|bidi }}">
+                          {{ job.job_requirements }}
+                      </div>
+                      {% endautoescape %}
+                    </div>
+                    <div>
+                      <h5>How To Apply</h5>
+                      <p>
+                        To submit your application, please click on the "Apply Now" button below.
+                      </p>
+                      <div class="col-md-3">
+                        <a href="https://www.bayt.com{{ job.submission_email }}" class="site-button btn-block btn-sm">Apply Now &nbsp; <i class="fa fa-check"></i></a></p>
+                      </div>
+                    </div>
+                </div>            
+            </div>
+        </div>
+    </div>
+    
     </div>
     <!-- Job Detail -->
 

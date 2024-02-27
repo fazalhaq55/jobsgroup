@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Activate Your Account</title>
+
+    <style>
+        .btn {
+            display: inline-block;
+            font-weight: 400;
+            text-align: center;
+            white-space: nowrap;
+            vertical-align: middle;
+            user-select: none;
+            border: 1px solid transparent;
+            padding: 0.250rem 0.50rem;
+            font-size: 0.7rem;
+            line-height: 1.5;
+            border-radius: 0.25rem;
+          }
+          .btn-primary {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+          }
+          
+          .btn-primary:hover {
+            color: #fff;
+            background-color: #0069d9;
+            border-color: #0062cc;
+          }
+          
+          .btn-primary:focus,
+          .btn-primary.focus {
+            color: #fff;
+            background-color: #0069d9;
+            border-color: #0062cc;
+            box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+          }
+          
+          .btn-primary.disabled,
+          .btn-primary:disabled {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+          }
+          
+          .btn-primary:not(:disabled):not(.disabled).active,
+          .btn-primary:not(:disabled):not(.disabled):active,
+          .show > .btn-primary.dropdown-toggle {
+            color: #fff;
+            background-color: #0062cc;
+            border-color: #005cbf;
+          }
+    </style>
+
+</head>
+<body>
+    <div style="padding: 20px; background-color: inherit;">
+  
+    <h2>Activate Your Account</h2>
+    <p><b>Dear {{ user }},</b></p>
+    <p>Welcome to <b>{{ domain }}</b>, Afghanistan Fastest Growing Jobs Portal in Afghanistan offering vacancies all over the country.</p>
+    <p>To ensure the security and authenticity of your recruiter account, please take a moment to verify your email address using the following verification button:</p>
+    <p><a class="btn btn-primary" href="{{ protocol }}://{{ domain }}{% url 'activate' uidb64=uid token=token %}">Click to Verify Your Account</a></p>
+    <p>By verifying your account, you will unlock access to a wide range of powerful features and tools designed to streamline your hiring process.</p>
+    <p>If you encounter any difficulties during the verification process or require any assistance with our platform's features, our dedicated customer support team is always ready to assist you. Simply reach out to us at <a href="mailto:wazifaha.org@gmail.com"><b>wazifaha.org@gmail.com</b></a> or send a message on WhatsApp at <b>+93789259995</b>, and we will be more than happy to help.</p>
+    <p>Thank you for choosing <b>{{ domain }}</b> as your trusted platform for recruiting top talent in Afghanistan. We are committed to providing you with a seamless and efficient hiring experience. Get ready to find exceptional candidates who will contribute to your organization's success!</p>
+    <br>
+    <p>Regards,</p>
+    <h3>Wazifaha.org</h3>
+    <p>This is a system-generated email. Please do not reply to this email.</p>
+          
+</div>
+</body>
+</html>

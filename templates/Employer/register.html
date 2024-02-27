@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+{% block title %} Wazifaha | Register User {% endblock %}
+
+{% load static %}
+
+{% block meta_data %}
+<meta property="og:image" content="{% static 'assets/website_meta.jpgs' %}" />
+<meta property="og:image:alt" content="index page logo">
+<meta name="og:url" content="https://www.wazifaha.org/">
+<meta name="og:title" content="Wazifaha.org | Find Your Dream Job in Afghanistan">
+<meta name="og:site_name" content="Wazifaha.org">
+{% endblock %}
+
+{% block styles %}
+    <style>
+    .messages .success {
+        background-color: #d4edda;
+        border-color: #c3e6cb;
+        color: #155724;
+    }
+    
+        /* Error message */
+        .messages .error {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        .col-form-label{
+            font-size: 13px !important;
+            font-weight: bold !important;
+            line-height: 25px !important;
+        }
+        /* Info message */
+        .messages .info {
+            background-color: #d1ecf1;
+            border-color: #bee5eb;
+            color: #0c5460;
+        }
+        
+        /* Message container */
+        .messages {
+            list-style: none;
+            border-radius: 5px;
+        }
+        
+        /* Message item */
+        .messages li {
+            margin-bottom: 5px;
+            padding: 5px;
+            font-size: 16px !important;
+            border-width: 1px;
+            border-style: solid;
+            border-radius: 3px;
+        }
+    </style>
+{% endblock %}
+{% block head %}
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R97FMRD95N"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R97FMRD95N');
+</script>
+{% endblock %}
+{% block content %}
+<!-- Title Header Start -->
+<div class="section-full content-inner-2 shop-account">
+       <!-- Product -->
+       <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3 class="font-weight-700 m-t0 m-b20">Create An Account</h3>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 m-b30">
+                <div class="p-a30 border-1  max-w1000 m-auto">
+                    <div class="tab-content">
+
+                {% if form.errors %}
+                {% for field in form %}
+                <ul class="messages">
+                    {% for error in field.errors %}
+                        <li class="error" style="color: black;"> {{ error|escape }} </li>
+                    {% endfor %}
+                </ul>
+                {% endfor %}
+                {% for error in form.non_field_errors %}
+                    {{ error|escape }}
+                {% endfor %}
+                {% endif %}
+              <form class="tab-pane active col-12 p-a0" action="" id="login" method="post" enctype="multipart/form-data">
+              {% csrf_token %}
+              <h4 class="font-weight-700">PERSONAL INFORMATION</h4>
+                <p class="font-weight-600">If you have an account with us, please log in.</p>
+              <fieldset>
+
+                    <div class="form-group">
+                    <label for="id_email" style="color: black;">Email <span class="text-danger">*</span></label>
+                    {{ form.email }}
+                    </div>
+
+                    <div class="form-group">
+                    <label for="id_password1" style="color: black;">Password <span class="text-danger">*</span></label>
+                    {{ form.password1 }}
+                    </div>
+
+                    <div class="form-group">
+                    <label for="id_password2" style="color: black;">Password Confirmation <span class="text-danger">*</span></label>
+                    {{ form.password2 }}
+                    </div>
+
+                    <div class="form-group">
+                    <label for="id_first_name" style="color: black;">First Name <span class="text-danger">*</span></label>
+                    {{ form.first_name }}
+                    </div>
+
+                    <div class="form-group">
+                    <label for="id_last_name" style="color: black;">Last Name</label>
+                    {{ form.last_name }}
+                    </div>
+
+                
+                    <div class="form-group">
+                    <label for="id_country" style="color: black;">Country <span class="text-danger">*</span></label>
+                    {{ form.country }}
+                    </div>
+
+                    <div class="form-group">
+                    <label for="id_company_name" style="color: black;">Company Name <span class="text-danger">*</span></label>
+                    {{ form.company_name }}
+                    </div>
+
+                    <div class="form-group">
+                    <label for="id_company_type" style="color: black;">Company Type <span class="text-danger">*</span></label>
+                    {{ form.company_type }}
+                    </div>
+
+                    <div class="form-group">
+                    <label for="id_contact_number" style="color: black;">Contact Number <span class="text-danger">*</span></label>
+                    {{ form.contact_number }}
+                    </div>
+
+                    <div class="form-group">
+                    <label for="id_about_company" style="color: black;">About Company</label>
+                    {{ form.about_company }}
+                    {{ form.media }}
+                    </div>
+
+                    <div class="form-group">
+                    <label for="id_company_image" style="color: black;">Company Logo</label>
+                    {{ form.company_image }}
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary btn-lg font-weight-medium">Submit</button>
+                    </div>
+                </div>
+
+              </fieldset>
+            </form>
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+<!-- Product END -->
+</div>
+
+
+{% endblock %}
+
+</body>
+</html>

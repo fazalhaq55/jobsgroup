@@ -1,0 +1,166 @@
+{% extends 'user_base.html' %}
+
+{% block top_content %}
+<div class="col-12">
+    <div class="card card-statistics">
+        <div class="card-body">
+        <div class="d-flex flex-column flex-md-row align-items-center justify-content-between">
+            <div class="statistics-item">
+                <p>
+                <i class="icon-sm fa fa-suitcase mr-2"></i>
+                Jobs Posted
+                </p>
+                <h2>{{ jobs_posted }}</h2>
+                
+            </div>
+            <div class="statistics-item">
+                <p>
+                <i class="icon-sm fas fa-check-circle mr-2"></i>
+                Approved Jobs
+                </p>
+                <h2>{{ jobs_approved }}</h2>
+            </div>
+            <div class="statistics-item">
+                <p>
+                <i class="icon-sm fas fa-window-close mr-2"></i>
+                Declined Jobs
+                </p>
+                <h2>{{ jobs_declined }}</h2>
+                
+            </div>
+            <div class="statistics-item">
+                <p>
+                <i class="icon-sm fas fa-clock mr-2"></i>
+                Pending
+                </p>
+                <h2>{{ jobs_pending }}</h2>
+            </div>
+
+        </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+<div class="col-md-6 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+        <h4 class="card-title">
+            <i class="fas fa-dollar-sign"></i>
+          Price Charges
+          Last Update: 2024-01-21        
+        </h4>
+      
+        <p>Please be advised that the following fees will be charged per vacancy: NGOs, private sector/profit agencies and UN/Donor organizations will be charged 100 AFN or equivalent in $ dollar. Payments can be made through the bank accounts and hesab pay account provided below. Once the bank payment has been transferred, please send us a soft copy of the bank receipt at +93789259995 WhatsApp to process your announcements.
+        </p>
+<h5>
+    Bank account details:
+</h5>
+
+<p><b>USD Account:</b></p>
+
+<ul>
+    <li>Bank name: Azizi Bank</li>
+
+   <li>Account name: FAZAL HAQ</li>
+
+    <li>Account number: 003401200931505</li>
+</ul>
+
+<p><b>AFN Account:</b></p>
+<ul>
+    <li>Bank name: New Kabul Bank</li>
+
+    <li>Account name: FAZEL HAQ</li>
+
+    <li>Account number: 89259995</li>
+</ul>
+
+<p><b>Hesab Pay Account (Online Payment):</b></p>
+<ul>
+    <li>
+        Account Name: Fazalhaq Zaland
+    </li>
+    <li>
+        Account Number: 0789259995
+    </li>
+</ul>
+<p>Thanks</p>
+<p><b>Wazifaha.org Team</b></p>
+      </div>
+    </div>
+  </div>
+
+
+<div class="col-md-6">
+    <div class="card">
+        <div class="card-body"><div class="chartjs-size-monitor" style="position: absolute; inset: 0px; overflow: hidden; pointer-events: none; visibility: hidden; z-index: -1;"><div class="chartjs-size-monitor-expand" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:1000000px;height:1000000px;left:0;top:0"></div></div><div class="chartjs-size-monitor-shrink" style="position:absolute;left:0;top:0;right:0;bottom:0;overflow:hidden;pointer-events:none;visibility:hidden;z-index:-1;"><div style="position:absolute;width:200%;height:200%;left:0; top:0"></div></div></div>
+            <h6 class="card-title" style="font-size: 15px;">
+                <i class="fa fa-th-large"></i>
+                Your post will be featured on these top media platforms for free!      
+                <br><br>
+                <p>Last Update : 2024-01-21</p>
+            </h6>
+
+            <div class="row">
+                <div class="col-md-6 d-flex align-items-center mb-3 mb-md-0">
+                    <button class="btn btn-social-icon btn-facebook btn-rounded">
+                        <i class="fab fa-facebook-f"></i>
+                        </button>
+                        <div class="ml-4">
+                        <h5 class="mb-1"><a href="https://www.facebook.com/wazifaha55?mibextid=ZbWKwL">Facebook Page</a></h5>
+                        <p class="mb-0">125,484 Followers</p>
+                        </div>
+                </div>
+                
+                <div class="col-md-6 d-flex align-items-center mb-3 mb-md-0">
+                    <button class="btn btn-social-icon btn-linkedin btn-rounded">
+                        <i class="fab fa-telegram"></i>
+                      </button>
+                      <div class="ml-4">
+                        <h5 class="mb-1"><a href="https://t.me/wazifaha">Telegram</a></h5>
+                        <p class="mb-0">50,904 Subscribers</p>
+                      </div>
+                </div>
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="col-md-6 d-flex align-items-center mb-3 mb-md-0">
+                    <button class="btn btn-social-icon btn-facebook btn-rounded">
+                        <i class="fab fa-facebook"></i>
+                      </button>
+                      <div class="ml-4">
+                        <h5 class="mb-1"><a href="https://www.facebook.com/groups/130110835673975/?ref=share_group_link">Facebook Group</a></h5>
+                        <p class="mb-0">37,560 Members</p>
+                      </div>
+                </div>
+
+                <div class="col-md-6 d-flex align-items-center mb-3 mb-md-0">
+                    <button class="btn btn-social-icon btn-dribbble btn-rounded">
+                        <i class="fa fa-globe"></i>
+                      </button>
+                      <div class="ml-4">
+                        <h5 class="mb-1"><a href="https://www.wazifaha.org/">Website</a></h5>
+                        <p class="mb-0">500,000 Unique Visitors per month </p>
+                      </div>
+                </div>
+
+            </div>
+            <br><br>
+            <div class="row">
+                <div class="col-md-6 d-flex align-items-center mb-3 mb-md-0">
+                    <button class="btn btn-social-icon btn-success btn-rounded">
+                        <i class="fab fa-whatsapp"></i>
+                      </button>
+                      <div class="ml-4">
+                        <h5 class="mb-1"><a href="https://whatsapp.com/channel/0029VaCOx2dFHWpyA2IGrX0L">WhatsApp Channel</a></h5>
+                        <p class="mb-0">10,230 Followers</p>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div> 
+</div>
+{% endblock %}

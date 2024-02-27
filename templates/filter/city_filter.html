@@ -1,0 +1,442 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block meta_data %} 
+<meta property="og:title"         content="Jobsgroup.org | Search Your Dream Job" />
+<meta property="og:image" content="{% static 'assets/images/logo.png' %}" />
+<meta name="og:site_name" content="Jobsgroup.org | Jobs in Afghanistan">
+<meta name="keywords"
+  content="search for job, search job, search in job">
+
+{% endblock %}
+{% load replace_string %}
+{% block styles %}
+<style>
+    .side-widget {
+        background: #fff;
+        border-radius: 4px;
+        border: 1px solid #eceff3;
+        margin-bottom: 30px;
+        overflow: hidden;
+        color: black !important;
+    }
+
+    h4.side-widget-title {
+        margin: 0;
+        text-align: left;
+        padding-left: 12px;
+        color: #fff;
+        font-size: 17px;
+        text-transform: uppercase;
+        line-height: 48px;
+    }
+
+    dl,
+    ul,
+    ol {
+        list-style-position: outside;
+        padding: 0;
+        font-size: 13px !important;
+    }
+    ul,
+    ol {
+        margin-bottom: 24px;
+    }
+    ul li,
+    ol li {
+        padding: 0;
+    }
+    dl {
+        margin-left: 0;
+        margin-bottom: 30px;
+    }
+    dl dd {
+        margin-bottom: 10px;
+    }
+    
+</style>
+{% endblock %}
+
+{% block head %}
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-YXSEKCK7CV"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-YXSEKCK7CV');
+</script>
+
+<meta name="google-adsense-account" content="ca-pub-8245638410583528">
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8245638410583528"
+     crossorigin="anonymous"></script>
+
+{% endblock %}
+
+{% block content %}
+<div class="page-content">
+   
+    <!-- Our Job -->
+    <div class="section-full bg-white content-inner-2">
+        <div class="container">
+            <div class="find-job-bx">
+                <p class="site-button button-sm">Find Jobs, Employment & Career Opportunities</p>
+
+                <form class="dezPlaceAni" action="{% url 'search' %}" method="GET">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-4">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <input type="text" name="what" class="form-control" placeholder="Job Title or Keyword">
+                                    <div class="input-group-append">
+                                      <span class="input-group-text"><i class="fa fa-search"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <select name="category" class="form-control">
+                                        <option value="">
+                                            By Category
+                                        </option>
+                                        {% if categories_for_search %}
+                                        {% for cate in categories_for_search %}
+                                        {% if cate.category != '' %}
+                                        <option value="{{ cate.slug_cate }}">
+                                            {{ cate.category }}</option>
+                                        {% else %}
+                                            
+                                            {% endif %}
+
+                                    {% endfor %}
+                                    {% endif %}
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-4 col-md-4">
+                            <div class="form-group">
+                                <div class="input-group">
+                                <select name="emp_type" class="form-control">
+                                    {% if emp_type_ %}
+                                        {% for i in emp_type_ %}
+                                            {% if i.emp_type != '--' %}
+                                            <option value="{{ i.emp_type }}">{{ i.emp_type }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <select name="where" class="form-control">
+                                        <option value="">
+                                        By Location
+                                    </option>
+                                    {% for i in locations %}
+                                    {% if ',' not in i.job_location %}
+                                        <option value="{{ i.job_location }}">
+                                            {{ i.job_location }}
+                                        </option>
+                                    {% endif %}
+                                    {% endfor %}
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+                        
+
+
+                        <div class="col-lg-2 col-md-6">
+                            <button type="submit" class="site-button btn-block">Find Job</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <hr>
+            <div class="d-flex job-title-bx section-head">
+                <div class="mr-auto">
+                    <h6 class="fw4 m-b0"><strong> <b>{{ count_rows }}</b></strong> jobs match your search 
+                        
+                        {% if what_keyword %} for {{ what_keyword }} {% endif %}
+                        {% if category_name %} in {{ category_name.category }} {% endif %}
+                        {% if where_keyword %} in {{ where_keyword }} {% endif %}
+
+                        {% if emp_type %} in {{ emp_type }} {% endif %}
+                        
+                    </h5>
+                </div>
+            </div>
+            
+                    <div class="section-full bg-white content-inner-2" style="padding-top: 0px !important; padding-bottom: 0px !important;">
+                        <div class="container">
+                            <div class="row">
+
+                                <div class="col-md-4">
+                                    <div class="candidates-are-sys m-b30">
+                                        <div class="candidates-bx">
+                                            <div class="side-widget">
+                                                <h4 class="side-widget-title bg-primary">Filter Jobs</h4>
+                                                <div class="widget border-0 p-3">
+                                
+                                                    <!-- Industry Filter -->
+                                                    <ul class="list-unstyled" id="industryList">
+                                                        <li class="font-weight-bold">Industry</li>
+                                                        {% for i in company_industry %}
+                                                            <li class="industry-item" style="{% if forloop.counter > 5 %} display: none;{% endif %} margin-top:5px;">
+                                                                <a href="{% url 'search_industry' %}?industry={{ i.company_industry_slug }}"><span style="color: #337ab7;">{{ i.company_industry     }}</span> <span class="text-muted">({{ i.total }} Jobs)</span></a></li>
+                                                        {% endfor %}
+                                                        <button class="btn btn-link btn-sm" id="showMoreBtn" onclick="showMore()">Show More</button>
+                                                    </ul>
+                                
+                                                    <!-- City Filter -->
+                                                    <ul class="list-unstyled mt-3" id="cityList">
+                                                        <li class="font-weight-bold">City</li>
+                                                        {% for i in cities %}
+                                                            <li class="city-item" style="{% if forloop.counter > 5 %} display: none; {% endif %} margin-top:5px;">
+                                                                <a href="{% url 'search_city' %}?city={{ i.city_slug }}"><span style="color: #337ab7;">{{ i.city }}</span> <span class="text-muted">({{ i.total }} Jobs)</span></a>
+                                                            </li>
+                                                        {% endfor %}
+                                                        <button class="btn btn-link btn-sm" id="showMoreBtnCity" onclick="showMoreCity()">Show More</button>
+                                                    </ul>
+        
+                                                     <!-- City Filter -->
+                                                     <ul class="list-unstyled mt-3" id="companyList">
+                                                        <li class="font-weight-bold">Company Type</li>
+                                                        {% for i in company_type %}
+                                                            <li class="company-item" style="{% if forloop.counter > 2 %} display: none; {% endif %} margin-top:5px;">
+                                                                <a href="{% url 'search_cmp_type' %}?cmp_type={{ i.company_type_slug }}"><span style="color: #337ab7;">{{ i.company_type }}</span> <span class="text-muted">({{ i.total }} Jobs)</span></a>
+                                                            </li>
+                                                        {% endfor %}
+                                                        <button class="btn btn-link btn-sm" id="showMoreBtnCompany" onclick="showMoreCompany()">Show More</button>
+                                                    </ul>
+        
+                                                     <!-- City Filter -->
+                                                     <ul class="list-unstyled mt-3" id="EmpList">
+                                                        <li class="font-weight-bold">Employement Type</li>
+                                                        {% for i in emp_type_ %}
+                                                            <li class="emp-item" style="{% if forloop.counter > 3 %} display: none; {% endif %} margin-top:5px;">
+                                                                <a href="{% url 'search_emp_type' %}?emp_type={{ i.emp_type_slug }}"><span style="color: #337ab7;">
+                                                                    {% if '--' in i.emp_type %}
+        
+                                                                    {% else %}
+                                                                    {{ i.emp_type }}</span> <span class="text-muted">({{ i.total }} Jobs)</span></a>
+                                                                    {% endif %}
+                                                            </li>
+                                                        {% endfor %}
+                                                        <button class="btn btn-link btn-sm" id="showMoreBtnEmp" onclick="showMoreEmp()">Show More</button>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                
+                                <div class="col-lg-8" id="jobRecordsContainer">
+                                    <ul class="post-job-bx">
+                                        {% if queryset %}
+                                        {% for job in queryset %}
+                                        <li class="_li">
+                                          
+                                                <div class="d-flex m-b20">
+                                                    {% now "Y-m-d" as todays_date %}
+                                                    {% if job.job_date|date:"Y-m-d" == todays_date %}
+                                                            <span style="border: none;"><span class="label label-warning rounded">New</span></span>
+                                                    {% else %}
+                                                    {% endif %}
+                                                    <a href="{% url '' job.id job.jobs_slug %}">
+                                                    <div class="job-post-company">
+                                                        {% if not job.posted_by.company_image %}
+                                                                {% if job.org_photo.photo %}
+                                                                <figure>
+                                                                    <img src="{{ job.org_photo.photo.url }}">
+                                                                    </figure>
+                                                                    {% endif %}
+                                                                {% endif %}
+                                                                {% if job.posted_by.company_image %}
+        
+                                                                        <figure>
+                                                                            <img src="{{ job.posted_by.company_image.url }}">
+                                                                            </figure>
+                                                                {% endif %}
+                                                    </div>
+                                                    </a>
+                                                    <div class="job-post-info">
+                                                        <a href="{% url '' job.id job.jobs_slug %}">
+                                                        <h6>{{ job.job_title|replace_string|truncatechars:40 }}</h6>
+                                                        </a>
+                                                        <ul>
+                                                            <li data-toggle="tooltip" data-placement="top" title="{{ job.organzation }}"><i class="fa fa-map-marker"></i> 
+                                                                {% if job.posted_by.id %}
+                                                                <a href="{% url 'companies' job.posted_by.id job.slug_cpn  %}" style="text-decoration:underline;">{{ job.organzation|truncatechars:40 }}</a>
+                                                                {% else %}
+                                                                <a href="{% url 'companies' job.slug_cpn  %}" style="text-decoration:underline;">{{ job.organzation|truncatechars:40 }}</a>
+                                                                {% endif %}
+        
+                                                            </li>
+                                                            <li data-toggle="tooltip" data-placement="top" title="Location"><i class="fa fa-globe"></i> 
+                                                                {% if ',' not in job.job_location %}
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Location">{{ job.job_location }}</span>
+                                                                {% else %}
+                                                                <span data-toggle="tooltip" data-placement="top" title="Location">Multi Locations</span>
+                                                                {% endif %}
+                                                            </li>
+                                                            <!-- <li><i class="fa fa-clock-o"></i> {{ job.whenpublished }}</li> -->
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <div class="job-time mr-auto">                                                    
+                                                        {% if job.no_of_jobs > '1' %}
+                                                        {% if 'Unspecified' in job.no_of_jobs %}
+                                                        {% else %}
+                                                                <span style="text-transform:capitalize !important;">
+                                                                    {{ job.no_of_jobs }} Vacancies</span>
+                                                        {% endif %}
+                                                        {% endif %}
+                
+                                                        {% if job.gender == 'Male' %}
+                                                        <span style="text-transform:capitalize !important;"> {{ job.gender }} <i class="fa fa-male"></i></span>
+                                                        {% endif %}
+                                                        {% if job.gender == 'Female' %}
+                                                        <span style="text-transform:capitalize !important;"> {{ job.gender }} <i class="fa fa-female"></i></span>
+                                                        {% endif %}
+                                                        
+                                                        {% if job.emp_type == '--' %}
+                                                        
+                                                        {% else %}
+                                                        <span style="text-transform:capitalize !important;" data-toggle="tooltip" data-placement="top" title="Employment Type">
+                                                            <i class="fa fa-bookmark-o"></i> {{ job.emp_type }}
+                                                        </span>
+                                                        {% endif %}
+        
+                                                        {% if job.salary != 'Unspecified' %}
+                                                        <span style="text-transform:capitalize !important;" data-toggle="tooltip" data-placement="top" title="Employment Type">
+                                                            <i class="fa fa-money"></i> {{ job.salary }}
+                                                        </span>
+                                                        {% else %}
+                                                        
+                                                        {% endif %}
+        
+                                                        
+                                                    </div>
+                                                            <span><a href="https://www.bayt.com{{ job.submission_email }}" class="site-button btn-block btn-sm">Apply Now &nbsp; <i class="fa fa-check-circle"></i></a></span>
+                                                    </div>
+                                            
+                                                <!-- <span class="post-like fa fa-heart-o"></span> -->
+                                        </li>
+                                        {% endfor %}
+                                        {% endif %}    
+                                    </ul>
+                                    <div class="m-t30">
+                                        <div class="pagination">
+                                            {% if jobs_founded.has_previous %}
+                                            <li>
+                                                <a href="?page=1"> <i class="fa fa-angle-double-left"></i></a>
+                                                <a href="?page={{ jobs_founded.previous_page_number }}"> <i class="fa fa-angle-left"></i></a>
+                                            </li>
+                                            {% endif %}
+                                            {% for num in jobs_founded.paginator.page_range %}
+                                            {% if jobs_founded.number == num %}
+                                            <li class="active">
+                                                <a><strong>{{ num }}</strong></a>
+                                            </li>
+                                            {% elif num > jobs_founded.number|add:'-3' and num < jobs_founded.number|add:'3' %}
+                                            <li>
+                                                <a href="?page={{ num }}"> {{ num }}</a>
+                                            </li>
+                                            {% endif %}
+                                            {% endfor %}
+                        
+                                            {% if jobs_founded.has_next %}
+                                            <li>
+                                                <a href="?page={{ jobs_founded.next_page_number }}"><i class="fa fa-angle-right"></i></a>
+                                                <a href="?page={{ jobs_founded.paginator.num_pages }}"><i class="fa fa-angle-double-right"></i></a>
+                                            </li>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>  
+                                
+                                <div class="col-md-4">
+                                    <div class="sticky-top">
+                                        <div class="candidates-are-sys m-b30">
+                                            <div class="candidates-bx">
+                                                <div  class="side-widget">
+                                                    <h4 class="side-widget-title" style="background:#337ab7;">Advertisments</h4>
+            
+            
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+            
+                            </div>
+                        </div>
+                    </div>
+    </div>
+</div>
+<!-- Our Job END -->
+</div>
+<!-- Call To Action END -->
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    function showMore() {
+        var industryList = document.getElementById("industryList");
+        var industryItems = industryList.getElementsByClassName("industry-item");
+
+        for (var i = 5; i < industryItems.length; i++) {
+            industryItems[i].style.display = "block";
+        }
+
+        document.getElementById("showMoreBtn").style.display = "none";
+    }
+
+    function showMoreCity() {
+        var CityList = document.getElementById("cityList");
+        var CityItems = CityList.getElementsByClassName("city-item");
+    
+        for (var i = 5; i < CityItems.length; i++) {
+            CityItems[i].style.display = "block";
+        }
+    
+        document.getElementById("showMoreBtnCity").style.display = "none";
+    }
+
+    function showMoreCompany() {
+        var CompanyList = document.getElementById("companyList");
+        var CompanyItems = CompanyList.getElementsByClassName("company-item");
+    
+        for (var i = 2; i < CompanyItems.length; i++) {
+            CompanyItems[i].style.display = "block";
+        }
+    
+        document.getElementById("showMoreBtnCompany").style.display = "none";
+    }
+
+    function showMoreEmp() {
+        var EmpList = document.getElementById("EmpList");
+        var EmpItems = EmpList.getElementsByClassName("emp-item");
+    
+        for (var i = 3; i < EmpItems.length; i++) {
+            EmpItems[i].style.display = "block";
+        }
+    
+        document.getElementById("showMoreBtnEmp").style.display = "none";
+    }
+
+</script>
+{% endblock %}

@@ -19,6 +19,14 @@ status_choices = (
 )
 class Info(models.Model):
     
+    company_type = models.CharField(max_length=500, null=True, blank=True)
+    company_industry = models.CharField(max_length=500, null=True, blank=True)
+    company_industry_slug = models.CharField(max_length=500, null=True, blank=True)
+    city_slug = models.CharField(max_length=500, null=False, blank=True)
+    company_type_slug = models.CharField(max_length=500, null=True, blank=True)
+    emp_type_slug = models.CharField(max_length=500, null=True, blank=True)
+    work_from_home = models.BooleanField(default=False)
+
     jobs_slug = models.SlugField(max_length=1000, null=False, blank=False)
     job_title = models.CharField(max_length=1000, null=True, blank=True)
     meta_tag = models.CharField(max_length=1000, null=True, blank=True)

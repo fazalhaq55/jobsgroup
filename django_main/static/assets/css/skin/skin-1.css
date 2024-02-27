@@ -76,7 +76,7 @@
 .custom-checkbox .custom-control-input:checked ~ .custom-control-label:before,
 .pagination li.active a,
 .rev-slider .tparrows {
- background-color: #337ab7;
+ background-color: #2784F4;
 }
 /*Hex color :hover */
 .site-button:active,
@@ -100,10 +100,10 @@
 .owl-btn-1.primary .owl-next:hover,
 .owl-btn-2.primary .owl-prev:hover, 
 .owl-btn-2.primary .owl-next:hover{
- background-color: #337ab7;
+ background-color: #2784F4;
 }
 .about-us .dez-tabs .nav-tabs li a.active {
- border-right: 4px solid #337ab7;
+ border-right: 4px solid #2784F4;
 }
 
 
@@ -190,13 +190,13 @@ h6 a:hover,
 .widget_nav_menu li a:hover, 
 .widget_recent_entries ul li a:hover, 
 .widget_services ul li a:hover {
- color: #337ab7;
+ color: #2784F4;
 }
 @media only screen and (max-width: 991px) {
  .nav-dark.header-nav .nav > li > a:hover, 
 	.nav-dark.header-nav .nav > li > a:active, 
 	.nav-dark.header-nav .nav > li > a:focus {
-  color: #337ab7;
+  color: #2784F4;
  }
 }
 /*===================== 
@@ -220,22 +220,22 @@ input[type="radio"] + label:hover:before,
 .owl-theme.dots-style-3 .owl-dots .owl-dot.active, 
 .owl-theme.dots-style-3 .owl-dots .owl-dot:hover,
 .side-bar .widget_tag_cloud a:hover {
- border-color: #337ab7;
+ border-color: #2784F4;
 }
 .owl-item.active.center .testimonial-8 .testimonial-text:after {
- border-top:15px solid #337ab7;
+ border-top:15px solid #2784F4;
 }
 .dez-tabs.border-top .nav-tabs > li > a.active,
 .header-nav .nav > li .sub-menu, 
 .header-nav .nav > li .mega-menu {
- border-top-color: #337ab7;
+ border-top-color: #2784F4;
 }
 .port-style1 .port-box {
- border-left: 3px solid #337ab7;
+ border-left: 3px solid #2784F4;
 }
 .choseus-tabs .nav li a.active {
-	border-bottom: 2px solid #337ab7;
+	border-bottom: 2px solid #2784F4;
 }
 .featurd-job-list .job-box-list:hover {
-    border-left: 2px solid #337ab7;
+    border-left: 2px solid #2784F4;
 }

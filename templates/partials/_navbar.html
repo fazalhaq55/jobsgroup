@@ -7,7 +7,7 @@
             <div class="container clearfix">
                 <!-- website logo -->
                 <div class="logo-header mostion">
-                    <a href="{% url 'index' %}"><img src="{% static 'assets/images/logo.png' %}" class="logo" alt="" style="object-fit: cover;"></a>
+                    <a href="{% url 'index' %}"><img src="{% static 'assets/images/full-white.png' %}" class="logo" alt="" style="object-fit: cover;"></a>
                 </div>
                 <!-- nav toggle button -->
                 <!-- nav toggle button -->
@@ -16,6 +16,14 @@
                     <span></span>
                     <span></span>
                 </button>
+
+                <div class="extra-nav">
+                    <div class="extra-cell">
+                        <a href="{% url 'register' %}" class="site-button bg-dark"><i class="fa fa-user"></i> Sign Up</a>
+                        <a href="{% url 'home' %}" class="site-button bg-dark"><i class="fa fa-lock"></i> login</a>
+                    </div>
+                </div>
+                
                 <!-- Quik search -->
                 <div class="dez-quik-search bg-primary">
                     <form action="#">
@@ -31,6 +39,7 @@
                         <li><a href="{% url 'companies' %}">Companies</a></li>
                         <li><a href="{% url 'application_form' %}">Application Forms</a></li>
                         <li><a href="{% url 'contact-us' %}">Contact us</a></li>
+                        
                     </ul>			
                 </div>
             </div>

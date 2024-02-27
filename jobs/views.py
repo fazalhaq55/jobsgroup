@@ -25,7 +25,7 @@ def jobs(request):
     
     jobs_count = Info.objects.filter(is_expired=False, status = 'approved').count # to count all jobs
     
-    paginator = Paginator(jobs, 15)
+    paginator = Paginator(jobs, 8)
     page = request.GET.get('page')
     try:
         paged_jobs = paginator.get_page(page)
@@ -42,6 +42,12 @@ def jobs(request):
     count_companies = Info.objects.filter(is_expired=False, status = 'approved').values('slug_cpn').annotate(total = Count('slug_cpn')).count 
     
 
+    cities = Info.objects.filter(is_expired=False, status = 'approved').values('city','city_slug').annotate(total = Count('city')).order_by('-total')
+    company_industry = Info.objects.filter(is_expired=False, status = 'approved').values('company_industry','company_industry_slug').annotate(total = Count('company_industry')).order_by('-total')
+    company_type = Info.objects.filter(is_expired=False, status = 'approved').values('company_type','company_type_slug').annotate(total = Count('company_type')).order_by('-total')
+    emp_type = Info.objects.filter(is_expired=False, status = 'approved').values('emp_type','emp_type_slug').annotate(total = Count('emp_type')).order_by('-total')
+    
+
     jobs_dict = {
         'jobs': paged_jobs,
         'jobs_count': jobs_count,
@@ -54,7 +60,11 @@ def jobs(request):
         'org_photos': org_photos,
         'prov_photos':prov_photos,
         'categories_for_search':categories_for_search,
-        'count_companies':count_companies
+        'count_companies':count_companies,
+        'cities': cities,
+        'company_industry':company_industry,
+        'company_type':company_type,
+        'emp_type':emp_type
     }
     return render(request, 'jobs/jobs.html', jobs_dict)
 
@@ -63,6 +73,11 @@ def job_details(request, id, slug):
    
     similiar_jobs = Info.objects.filter(category = job.category, is_expired=False, status = 'approved').order_by('-activation_date','-id')[:10]
     org_photos = OrgModel.objects.all()
+
+    locations = Info.objects.filter(is_expired=False, status='approved').values('city').annotate(total=Count('city')).order_by('-total')
+    emp_type = Info.objects.filter(is_expired=False, status = 'approved').values('emp_type','emp_type_slug').annotate(total = Count('emp_type')).order_by('-total')
+    categories_for_search = Info.objects.filter(is_expired=False, status = 'approved').values('category', 'slug_cate').annotate(total = Count('category')).order_by('-total')
+    
     
     # TO GET IP OF USER AND COUNT THE VISITS
     # def get_ip(request):
@@ -94,7 +109,10 @@ def job_details(request, id, slug):
         context = {
             'job': job,
             'similiar_jobs': similiar_jobs,
-            'org_photos':org_photos
+            'org_photos':org_photos,
+            'locations':locations,
+            'categories_for_search':categories_for_search,
+            'emp_type':emp_type
         }
 
         return render(request, 'jobs/jobs_details.html', context)

@@ -13,4 +13,8 @@ urlpatterns = [
     path('companies/<int:id>/<str:slug>', views.slug_companies_id, name="companies"),
     path('search-company', views.search_for_company, name="search-company"),
     path('contact-us', views.contact_us, name="contact-us"),
+    path('search_industry', views.search_for_industry, name='search_industry'),
+    path('search_city', views.search_for_city, name='search_city'),
+    path('search_cmp_type', views.search_cmp_type, name="search_cmp_type"),
+    path('search_emp_type', views.search_emp_type, name='search_emp_type'),
 ]

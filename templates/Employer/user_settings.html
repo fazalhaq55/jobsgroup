@@ -1,0 +1,195 @@
+{% extends 'user_base.html' %}
+{% load static %}
+
+{% block custom_styles %}
+<style>
+  .messages .success {
+      background-color: #d4edda;
+      border-color: #c3e6cb;
+      color: #155724;
+  }
+  
+      /* Error message */
+      .messages .error {
+          background-color: #f8d7da;
+          border-color: #f5c6cb;
+          color: #721c24;
+      }
+      .col-form-label{
+          font-size: 13px !important;
+          font-weight: bold !important;
+          line-height: 25px !important;
+      }
+      /* Info message */
+      .messages .info {
+          background-color: #d1ecf1;
+          border-color: #bee5eb;
+          color: #0c5460;
+      }
+      
+      /* Message container */
+      .messages {
+          list-style: none;
+          border-radius: 5px;
+      }
+      
+      /* Message item */
+      .messages li {
+          margin-bottom: 5px;
+          padding: 5px;
+          font-size: 16px !important;
+          border-width: 1px;
+          border-style: solid;
+          border-radius: 3px;
+      }
+  </style>
+{% endblock %}
+{% block content %}
+
+{% if form.errors %}
+{% for field in form %}
+<ul class="messages">
+    {% for error in field.errors %}
+        <li class="error"> {{ error|escape }} </li>
+    {% endfor %}
+</ul>
+{% endfor %}
+{% for error in form.non_field_errors %}
+    {{ error|escape }}
+{% endfor %}
+{% endif %}
+
+<div class="col-lg-12">
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Profile Information {% if request.user.first_name or request.user.last_name %} ({{ request.user.first_name }} {{ request.user.last_name }}) {% else %} 
+             {% endif %}
+          </h4>
+          {% if error_msg %}
+            <p>{{ error_msg }}</p>
+          {% endif %}
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group row">
+                    <label class="col-sm-4 col-form-label">Name <span class="text-danger">*</span></label>
+                    <div class="col-sm-8">
+                      {{ form.first_name }}
+                    </div>
+                  </div>
+                </div>
+                    <div class="col-md-4">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Last Name</label>
+                        <div class="col-sm-8">
+                            {{ form.last_name }}
+                        </div>
+                    </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">Email <span class="text-danger">*</span></label>
+                          <div class="col-sm-8">
+                            {{ form.email }}
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                
+
+                <div class="row">
+
+                        <div class="col-md-4">
+                        <div class="form-group row">
+                            <label class="col-sm-4 col-form-label">Country <span class="text-danger">*</span></label>
+                            <div class="col-sm-8">
+                                {{ form.country }}
+                            </div>
+                        </div>
+                        </div>
+
+                        <div class="col-md-4">
+                          <div class="form-group row">
+                              <label class="col-sm-4 col-form-label">Company Type <span class="text-danger">*</span></label>
+                              <div class="col-sm-8">
+                                  {{ form.company_type }}
+                              </div>
+                          </div>
+                          </div>
+        
+                          <div class="col-md-4">
+                          <div class="form-group row">
+                              <label class="col-sm-4 col-form-label">Company Name <span class="text-danger">*</span></label>
+                              <div class="col-sm-8">
+                                  {{ form.company_name }}
+                              </div>
+                          </div>
+                          </div>
+                  </div>  
+                    <div class="row">
+                            <div class="col-md-4">
+                            <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">Contact Number <span class="text-danger">*</span></label>
+                                <div class="col-sm-8">
+                                    {{ form.contact_number }}
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="col-md-4">
+                              <div class="form-group row">
+                                  <label class="col-sm-4 col-form-label">Company Image </label>
+                                  <div class="col-sm-8">
+
+                                    {% if request.user.company_image %}
+                                    <img src="{{ form.instance.company_image.url }}" alt="uer_logo" width="100" height="100">  
+                                    {% endif %}          
+
+                                   
+                                {{ form.company_image }}
+                            </div>
+                            </div>
+                            </div>
+                            
+                      </div>
+
+                <div class="row">
+                      <div class="col-md-4">
+                      <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">About Organization </label>
+                          <div class="col-sm-8">
+                              {{ form.media }}
+                              {{ form.about_company }}
+                          </div>
+                      </div>
+                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">Password <span class="text-danger">*</span></label>
+                          <div class="col-sm-8">
+                              {{ form.password1 }}
+                          </div>
+                      </div>
+                      </div>
+
+                      <div class="col-md-4">
+                      <div class="form-group row">
+                          <label class="col-sm-4 col-form-label">Password Confirmation <span class="text-danger">*</span></label>
+                          <div class="col-sm-8">
+                              {{ form.password2 }}
+                          </div>
+                      </div>
+                      </div>
+                  </div>
+      
+                  <input type="submit" class="btn btn-info" value="Update Profile">
+        </div>
+      </div>
+
+  </form>
+</div>
+{% endblock %}

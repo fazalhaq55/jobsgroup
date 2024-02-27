@@ -1,0 +1,180 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  {% include 'Employer/partial/header.html' %}
+  {% block custom_styles %} {% endblock %}
+<body>
+  <div class="container-scroller">
+    <!-- partial:partials/_navbar.html -->
+    <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row default-layout-navbar">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
+        <a class="navbar-brand brand-logo" href="https://www.wazifaha.org/"><img src="{% static 'assets/img/Nlogo.png' %}" style="width: 100% !important; height: 42px !important;" alt="logo"/></a>
+        <a class="navbar-brand brand-logo-mini" href="{% url 'home' %}">
+          {% if request.user.company_image %}
+          <img src="{{ request.user.company_image.url }}" alt="logo"/></a>
+          {% else %}
+          <img src="{% static 'assets/user_icon.jpg' %}" alt="logo"/></a>
+          {% endif %}
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-stretch">
+        <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
+          <span class="fas fa-bars"></span>
+        </button>
+        <ul class="navbar-nav navbar-nav-right">
+          <li class="nav-item d-none d-lg-flex">
+            <a class="nav-link" href="{% url 'add_job' %}">
+              <span class="btn btn-primary">+ Post Job</span>
+            </a>
+          </li>
+
+
+          <li class="nav-item nav-profile dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+             Profile
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
+              <a href="{% url 'settings' %}" class="dropdown-item">
+                <i class="fas fa-cog text-primary"></i>
+                Edit Profile
+              </a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'logout' %}">
+                <i class="fas fa-power-off text-primary"></i>
+                Logout
+              </a>
+            </div>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button" data-toggle="offcanvas">
+          <span class="fas fa-bars"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial:partials/_settings-panel.html -->
+      <div id="right-sidebar" class="settings-panel">
+        <i class="settings-close fa fa-times"></i>
+        <ul class="nav nav-tabs" id="setting-panel" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="todo-tab" data-toggle="tab" href="#todo-section" role="tab" aria-controls="todo-section" aria-expanded="true">TO DO LIST</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="chats-tab" data-toggle="tab" href="#chats-section" role="tab" aria-controls="chats-section">CHATS</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="setting-content">
+          <div class="tab-pane fade show active scroll-wrapper" id="todo-section" role="tabpanel" aria-labelledby="todo-section">
+            <div class="add-items d-flex px-3 mb-0">
+              <form class="form w-100">
+                <div class="form-group d-flex">
+                  <input type="text" class="form-control todo-list-input" placeholder="Add To-do">
+                  <button type="submit" class="add btn btn-primary todo-list-add-btn" id="add-task-todo">Add</button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- partial -->
+      <!-- partial:partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item nav-profile">
+            <div class="nav-link">
+              <div class="profile-image">
+                {% if request.user.company_image %}
+                <img src="{{ request.user.company_image.url }}" alt="logo"/></a>
+                {% else %}
+                <img src="{% static 'assets/user_icon.jpg' %}" alt="logo"/></a>
+                {% endif %}                
+              </div>
+              <div class="profile-name">
+                <p class="name">
+                  Welcome {{ request.user.last_name }} <br> 
+                </p>
+                <p class="designation">
+                  {% if request.user.is_staff %}
+                  Super Admin
+
+                  {% else %}
+                    Admin
+                  {% endif %}
+                </p>
+              </div>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'home' %}">
+              <i class="fa fa-home menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'add_job' %}">
+              <i class="fa fa-plus-circle menu-icon"></i>
+              <span class="menu-title">Post Job</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            {% if request.user.is_authenticated %}
+            <a class="nav-link" href="{% url 'job_listing' request.user.id %}">
+            {% else %}
+            <a class="nav-link" href="">
+            {% endif %}
+              <i class="fa fa-list menu-icon"></i>
+              <span class="menu-title">Posted Jobs</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            {% if request.user.is_authenticated %}
+            <a class="nav-link" href="{% url 'settings' %}">
+            {% else %}
+            <a class="nav-link" href="">
+            {% endif %}
+              <i class="fa fa-user-edit menu-icon"></i>
+              <span class="menu-title">Edit Profile</span>
+            </a>
+          </li>
+
+
+        </ul>
+      </nav>
+      <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+          <div class="page-header">
+            <h3 class="page-title">
+              Dashboard
+            </h3>
+          </div>
+          <div class="row grid-margin">
+              {% block top_content %} {% endblock %}
+          </div>
+          <div class="row">
+            {% block content %} {% endblock %}
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2023. All rights reserved.</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Wazifaha.org <i class="far fa-heart text-danger"></i></span>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+</body>
+
+{% include 'Employer/partial/footer_scripts.html' %}
+
+</html>

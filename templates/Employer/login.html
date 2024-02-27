@@ -1,0 +1,142 @@
+{% extends 'base.html' %}
+{% block title %} Wazifaha | Login {% endblock %}
+
+{% load static %}
+
+{% block meta_data %}
+
+<meta property="og:image" content="{% static 'assets/website_meta.jpgs' %}" />
+<meta property="og:image:alt" content="index page logo">
+<meta name="og:url" content="https://www.wazifaha.org/">
+<meta name="og:title" content="Wazifaha.org | Find Your Dream Job in Afghanistan">
+<meta name="og:site_name" content="Wazifaha.org">
+     
+{% endblock %}
+{% block head %}
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-R97FMRD95N"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-R97FMRD95N');
+</script>
+{% endblock %}
+
+
+{% block styles %}
+  <style>
+    .messages .success {
+      background-color: #d4edda;
+      border-color: #c3e6cb;
+      color: #155724;
+    }
+    
+    /* Error message */
+    .messages .error {
+      background-color: #f8d7da;
+      border-color: #f5c6cb;
+      color: #721c24;
+    }
+    .col-form-label{
+      font-size: 13px !important;
+      font-weight: bold !important;
+      line-height: 25px !important;
+    }
+    /* Info message */
+    .messages .info {
+      background-color: #d1ecf1;
+      border-color: #bee5eb;
+      color: #0c5460;
+    }
+    
+    /* Message container */
+    .messages {
+      margin: 10px 0;
+      padding: 10px;
+      list-style: none;
+      border-radius: 5px;
+    }
+    
+    /* Message item */
+    .messages li {
+      margin-bottom: 5px;
+      padding: 5px;
+      font-size: 16px !important;
+      border-width: 1px;
+      border-style: solid;
+      border-radius: 3px;
+    }
+  </style>
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="section-full content-inner-2 shop-account">
+  <!-- Product -->
+  <div class="container">
+      <div class="row">
+<div class="col-md-12 text-center">
+  <h3 class="font-weight-700 m-t0 m-b20">Login Your Account</h3>
+</div>
+</div>
+      <div>
+<div class="max-w500 m-auto m-b30">
+  <div class="p-a30 border-1 seth">
+    <div class="tab-content nav">
+      <form class="tab-pane active col-12 p-a0" action="" method="post" id="login">
+        {% csrf_token %}
+        <h4 class="font-weight-700">LOGIN</h4>
+        <p class="font-weight-600">If you have an account with us, please log in.</p>
+
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                {% autoescape off %}
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endautoescape %}
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <div class="form-group">
+          <label class="font-weight-700">E-MAIL *</label>
+          <input type="email" name="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="E-mail" autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label class="font-weight-700">PASSWORD *</label>
+          <input type="password" name="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="text-left">
+          <button class="site-button m-r5 button-lg">login</button>
+          <div class="text-center" style="color: black !important; margin-top: 16px !important;">
+            Don't have an account? <a href="{% url 'register' %}" class="text-primary" style="text-decoration: underline;">Create Account </a>
+          </div>
+        </div>
+
+        <div class="checkbox">
+          <label style="color: black !important;">
+            <input name="remember" type="checkbox" value="Remember Me"> Keep me signed in
+          </label>
+          <span class="pull-right">
+            <a href="#" class="forgot" style="color: black;">Forgot password?</a>
+          </span>
+        </div>
+      </fieldset>
+    
+      </form>
+
+        </div>
+      </div>
+      </div>
+      </div>
+      </div>
+  <!-- Product END -->
+</div>
+
+{% endblock %}

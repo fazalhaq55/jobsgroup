@@ -1,0 +1,348 @@
+{% extends 'user_base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .myclass{
+        list-style-type: none !important;
+    }
+    .col-form-label {
+      font-size: 12px !important;
+      font-weight: bold;
+    }
+    .text-danger {
+      font-weight: bold !important;
+      font-size: 15px !important;
+    }
+    .success {
+      background-color: #d4edda;
+      border: 1px solid #c3e6cb;
+      color: #155724;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+      list-style-type: none;
+    }
+    .error {
+      background-color: #ff8b8b;
+      border: 1px solid #ff8b8b;
+      color: #ffffff;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 4px;
+      list-style-type: none;
+    }
+</style>
+
+<div class="col-lg-12">
+  {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+
+{% endif %}
+<div class="card">
+  <div class="card-body">
+    <h4 class="card-title">Opportunity Information (Please fill out all the  fields)</h4>
+    {% if error_msg %}
+      <p>{{ error_msg }}</p>
+    {% endif %}
+
+      <form action=""  method="post">
+        {% csrf_token %}
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Job Title <span class="text-danger">*</span></label>
+              <div class="col-sm-8">
+                {{ form.job_title }}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group row">
+              <label class="col-sm-4 col-form-label">Job Location (Press Cntrl + Select the Provinces) <span class="text-danger">*</span></label>
+              <div class="col-sm-8">
+                  {{ form.job_location }}
+                </select>
+              </div>
+            </div>
+          </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Nationality <span class="text-danger">*</span></label>
+                <div class="col-sm-8">
+                  {{ form.nationality }}
+                </div>
+              </div>
+            </div>
+
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Employment Type <span class="text-danger">*</span></label>
+                  <div class="col-sm-8">
+                    {{ form.emp_type }}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Category <span class="text-danger">*</span></label>
+                  <div class="col-sm-8">
+                    {{ form.category }}
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="form-group row">
+                  <label class="col-sm-4 col-form-label">Vacancy Number (Optional)</label>
+                  <div class="col-sm-8">
+                    {{ form.vacancy_number }}
+                  </div>
+                </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Salary (Optional)</label>
+                <div class="col-sm-8">
+                  {{ form.salary }}
+                </div>
+              </div>
+           </div>
+
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Number of Jobs <span class="text-danger">*</span></label>
+                <div class="col-sm-8">
+                  {{ form.no_of_jobs }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">City (Optional)</label>
+                <div class="col-sm-8">
+                  {{ form.city }}
+                </div>
+              </div>
+           </div>
+
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Organization <span class="text-danger">*</span></label>
+                <div class="col-sm-8">
+                  {{ form.organzation }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Experience (Optional)</label>
+                <div class="col-sm-8">
+                  {{ form.years_of_experience }}
+                </div>
+              </div>
+           </div>
+
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Contract Duration (Optional)</label>
+                <div class="col-sm-8">
+                  {{ form.contract_duration }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Gender <span class="text-danger">*</span></label>
+                <div class="col-sm-8">
+                  {{ form.gender }}
+                </div>
+              </div>
+           </div>
+
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Education (Optional)</label>
+                <div class="col-sm-8">
+                  {{ form.education }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Close Date <span class="text-danger">*</span></label>
+                <div class="col-sm-8">
+                  {{ form.close_date }}
+                </div>
+              </div>
+           </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">About Description <span class="text-danger">*</span></label>
+                <div class="col-sm-8">
+                  {{ form.About_description }}
+                  {{ form.media }}
+                </div>
+              </div>
+           </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Job Description </label>
+                <div class="col-sm-8">
+                  {{ form.job_descriptions }}
+                  {{ form.media }}
+                </div>
+              </div>
+           </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Job Requirements </label>
+                <div class="col-sm-8">
+                  {{ form.job_requirements }}
+                  {{ form.media }}
+                </div>
+              </div>
+           </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Submission Guidlines <span class="text-danger">*</span></label>
+                <div class="col-sm-8">
+                  {{ form.submission_guidelines }}
+                  {{ form.media }}
+                </div>
+              </div>
+           </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group row">
+                <label class="col-sm-4 col-form-label">Submission Email</label>
+                <div class="col-sm-8">
+                  {{ form.submission_email }}
+                </div>
+              </div>
+           </div>
+          </div>
+
+            <input type="submit" class="btn btn-info" value="Update for review">
+      </form>
+  </div>
+</div>
+  </div>
+{% endblock %}
+
+{% block custom_scripts %}
+<script>
+  $(document).ready(function() {
+    $('#summernote').summernote(
+      {
+        placeholder: 'Write here about your organization',
+        tabsize: 2,
+        height: 200,
+        toolbar: [
+          ['style', ['style']],
+          ['color', ['color']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['insert', ['link']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      
+      }
+    );
+  });
+
+  $(document).ready(function() {
+    $('#summernote2').summernote(
+      {
+        placeholder: 'Write here job desriptions',
+        tabsize: 2,
+        height: 200,
+        toolbar: [
+          ['style', ['style']],
+          ['color', ['color']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['insert', ['link']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      
+      }
+    );
+  });
+
+  $(document).ready(function() {
+    $('#summernote3').summernote(
+      {
+        placeholder: 'Write here job desriptions',
+        tabsize: 2,
+        height: 200,
+        toolbar: [
+          ['style', ['style']],
+          ['color', ['color']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['insert', ['link']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      
+      }
+    );
+  });
+
+  $(document).ready(function() {
+    $('#summernote4').summernote(
+      {
+        placeholder: 'Submission Guidline here ...',
+        tabsize: 2,
+        height: 200,
+        toolbar: [
+          ['style', ['style']],
+          ['color', ['color']],
+          ['font', ['bold', 'underline', 'clear']],
+          ['para', ['ul', 'ol', 'paragraph']],
+          ['insert', ['link']],
+          ['view', ['fullscreen', 'codeview', 'help']]
+        ]
+      
+      }
+    );
+  });
+</script>
+{% endblock %}

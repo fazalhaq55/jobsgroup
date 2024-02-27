@@ -35,7 +35,7 @@ sitemaps = {
 urlpatterns = [
     path('', include('front_end.urls')),
     path('jobs/', include('jobs.urls')),
-    # path('user/', include('Employer.urls')),
+    path('user/', include('Employer.urls')),
     path('scholarships/', include('scholarship.urls')),
     path('admin/', admin.site.urls),
     path('users/', include('User.urls')),

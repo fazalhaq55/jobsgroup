@@ -85,7 +85,7 @@ crossorigin="anonymous"></script>
         <div class="section-full bg-white content-inner-2">
             <div class="container">
                 <div class="find-job-bx">
-                    <p class="site-button button-sm">Find Jobs, Employment & Career Opportunities</p>
+                    <p class="site-button button-sm">Find Your Dream Jobs & Career Opportunities</p>
 
                     <form class="dezPlaceAni" action="{% url 'search' %}" method="GET">
                         <div class="row">
@@ -171,81 +171,158 @@ crossorigin="anonymous"></script>
                     <div class="section-full bg-white content-inner-2" style="padding-top: 0px !important; padding-bottom: 0px !important;">
                         <div class="container">
                             <div class="row">
-                                <div class="col-lg-8">
+        
+                                <div class="col-md-4">
+                                    <div class="candidates-are-sys m-b30">
+                                        <div class="candidates-bx">
+                                            <div class="side-widget">
+                                                <h4 class="side-widget-title bg-primary">Filter Jobs</h4>
+                                                <div class="widget border-0 p-3">
+        
+                                                    <!-- Industry Filter -->
+                                                    <ul class="list-unstyled" id="industryList">
+                                                        <li class="font-weight-bold">Industry</li>
+                                                        {% for i in company_industry %}
+                                                            <li class="industry-item" style="{% if forloop.counter > 5 %} display: none;{% endif %} margin-top:5px;">
+                                                                <a href="{% url 'search_industry' %}?industry={{ i.company_industry_slug }}"><span style="color: #2784F4;">{{ i.company_industry     }}</span> <span class="text-muted">({{ i.total }} Jobs)</span></a></li>
+                                                        {% endfor %}
+                                                        <button class="btn btn-link btn-sm" id="showMoreBtn" onclick="showMore()">Show More</button>
+                                                    </ul>
+                                
+                                                    <!-- City Filter -->
+                                                    <ul class="list-unstyled mt-3" id="cityList">
+                                                        <li class="font-weight-bold">City</li>
+                                                        {% for i in cities %}
+                                                            <li class="city-item" style="{% if forloop.counter > 5 %} display: none; {% endif %} margin-top:5px;">
+                                                                <a href="{% url 'search_city' %}?city={{ i.city_slug }}"><span style="color: #2784F4;">{{ i.city }}</span> <span class="text-muted">({{ i.total }} Jobs)</span></a>
+                                                            </li>
+                                                        {% endfor %}
+                                                        <button class="btn btn-link btn-sm" id="showMoreBtnCity" onclick="showMoreCity()">Show More</button>
+                                                    </ul>
+        
+                                                     <!-- City Filter -->
+                                                     <ul class="list-unstyled mt-3" id="companyList">
+                                                        <li class="font-weight-bold">Company Type</li>
+                                                        {% for i in company_type %}
+                                                            <li class="company-item" style="{% if forloop.counter > 2 %} display: none; {% endif %} margin-top:5px;">
+                                                                <a href="{% url 'search_cmp_type' %}?cmp_type={{ i.company_type_slug }}"><span style="color: #2784F4;">{{ i.company_type }}</span> <span class="text-muted">({{ i.total }} Jobs)</span></a>
+                                                            </li>
+                                                        {% endfor %}
+                                                        <button class="btn btn-link btn-sm" id="showMoreBtnCompany" onclick="showMoreCompany()">Show More</button>
+                                                    </ul>
+        
+                                                     <!-- City Filter -->
+                                                     <ul class="list-unstyled mt-3" id="EmpList">
+                                                        <li class="font-weight-bold">Employement Type</li>
+                                                        {% for i in emp_type %}
+                                                            <li class="emp-item" style="{% if forloop.counter > 3 %} display: none; {% endif %} margin-top:5px;">
+                                                                <a href="{% url 'search_emp_type' %}?emp_type={{ i.emp_type_slug }}"><span style="color: #2784F4;">
+                                                                    {% if '--' in i.emp_type %}
+        
+                                                                    {% else %}
+                                                                    {{ i.emp_type }}</span> <span class="text-muted">({{ i.total }} Jobs)</span></a>
+                                                                    {% endif %}
+                                                            </li>
+                                                        {% endfor %}
+                                                        <button class="btn btn-link btn-sm" id="showMoreBtnEmp" onclick="showMoreEmp()">Show More</button>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+        
+                                <div class="col-lg-8" id="jobRecordsContainer">
                                     <ul class="post-job-bx">
                                         {% if jobs %}
                                         {% for job in jobs %}
                                         <li class="_li">
-                                  
-                                            <div class="d-flex m-b20">
-                                                <a href="{% url '' job.id job.jobs_slug %}">
-                                                <div class="job-post-company">
-                                                    {% if not job.posted_by.company_image %}
-                                                            {% if job.org_photo.photo %}
-                                                            <figure>
-                                                                <img src="{{ job.org_photo.photo.url }}">
-                                                                </figure>
-                                                                {% endif %}
-                                                            {% endif %}
-                                                            {% if job.posted_by.company_image %}
-    
-                                                                    <figure>
-                                                                        <img src="{{ job.posted_by.company_image.url }}">
-                                                                        </figure>
-                                                            {% endif %}
-                                                </div>
-                                                </a>
-                                                <div class="job-post-info">
+                                          
+                                                <div class="d-flex m-b20">
+                                                    {% now "Y-m-d" as todays_date %}
+                                                    {% if job.job_date|date:"Y-m-d" == todays_date %}
+                                                            <span style="border: none;"><span class="label label-warning rounded">New</span></span>
+                                                    {% else %}
+                                                    {% endif %}
                                                     <a href="{% url '' job.id job.jobs_slug %}">
-                                                    <h6>{{ job.job_title|replace_string|truncatechars:40 }}</h6>
+                                                    <div class="job-post-company">
+                                                        {% if not job.posted_by.company_image %}
+                                                                {% if job.org_photo.photo %}
+                                                                <figure>
+                                                                    <img src="{{ job.org_photo.photo.url }}">
+                                                                    </figure>
+                                                                    {% endif %}
+                                                                {% endif %}
+                                                                {% if job.posted_by.company_image %}
+        
+                                                                        <figure>
+                                                                            <img src="{{ job.posted_by.company_image.url }}">
+                                                                            </figure>
+                                                                {% endif %}
+                                                    </div>
                                                     </a>
-                                                    <ul>
-                                                        <li data-toggle="tooltip" data-placement="top" title="{{ job.organzation }}"><i class="fa fa-map-marker"></i> 
-                                                            
-                                                            {% if job.posted_by.id %}
-                                                            <a href="{% url 'companies' job.posted_by.id job.slug_cpn  %}" style="text-decoration:underline;">{{ job.organzation|truncatechars:40 }}</a>
-                                                            {% else %}
-                                                            <a href="{% url 'companies' job.slug_cpn  %}" style="text-decoration:underline;">{{ job.organzation|truncatechars:40 }}</a>
-                                                            {% endif %}
+                                                    <div class="job-post-info">
+                                                        <a href="{% url '' job.id job.jobs_slug %}">
+                                                        <h6>{{ job.job_title|replace_string|truncatechars:40 }}</h6>
+                                                        </a>
+                                                        <ul>
+                                                            <li data-toggle="tooltip" data-placement="top" title="{{ job.organzation }}"><i class="fa fa-map-marker"></i> 
+                                                                {% if job.posted_by.id %}
+                                                                <a href="{% url 'companies' job.posted_by.id job.slug_cpn  %}" style="text-decoration:underline;">{{ job.organzation|truncatechars:40 }}</a>
+                                                                {% else %}
+                                                                <a href="{% url 'companies' job.slug_cpn  %}" style="text-decoration:underline;">{{ job.organzation|truncatechars:40 }}</a>
+                                                                {% endif %}
+        
+                                                            </li>
+                                                            <li data-toggle="tooltip" data-placement="top" title="Location"><i class="fa fa-globe"></i> 
+                                                                {% if ',' not in job.job_location %}
+                                                                    <span data-toggle="tooltip" data-placement="top" title="Location">{{ job.job_location }}</span>
+                                                                {% else %}
+                                                                <span data-toggle="tooltip" data-placement="top" title="Location">Multi Locations</span>
+                                                                {% endif %}
+                                                            </li>
+                                                            <!-- <li><i class="fa fa-clock-o"></i> {{ job.whenpublished }}</li> -->
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="d-flex">
+                                                    <div class="job-time mr-auto">                                                    
+                                                        {% if job.no_of_jobs > '1' %}
+                                                        {% if 'Unspecified' in job.no_of_jobs %}
+                                                        {% else %}
+                                                                <span style="text-transform:capitalize !important;">
+                                                                    {{ job.no_of_jobs }} Vacancies</span>
+                                                        {% endif %}
+                                                        {% endif %}
+                
+                                                        {% if job.gender == 'Male' %}
+                                                        <span style="text-transform:capitalize !important;"> {{ job.gender }} <i class="fa fa-male"></i></span>
+                                                        {% endif %}
+                                                        {% if job.gender == 'Female' %}
+                                                        <span style="text-transform:capitalize !important;"> {{ job.gender }} <i class="fa fa-female"></i></span>
+                                                        {% endif %}
                                                         
-                                                        </li>
-                                                        <li data-toggle="tooltip" data-placement="top" title="Location"><i class="fa fa-globe"></i> 
-                                                            {% if ',' not in job.job_location %}
-                                                                <span data-toggle="tooltip" data-placement="top" title="Location">{{ job.job_location }}</span>
-                                                            {% else %}
-                                                            <span data-toggle="tooltip" data-placement="top" title="Location">Multi Locations</span>
-                                                            {% endif %}
-                                                        </li>
-                                                        <li><i class="fa fa-clock-o"></i> {{ job.whenpublished }}</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex">
-                                                <div class="job-time mr-auto">                                                    
-                                                    {% if job.no_of_jobs > '1' %}
-                                                    <span style="text-transform:capitalize !important;">{{ job.no_of_jobs }} Vacancies</span>
-                                                    {% endif %}
-            
-                                                    {% if job.gender == 'Male' %}
-                                                    <span style="text-transform:capitalize !important;"> {{ job.gender }} <i class="fa fa-male"></i></span>
-                                                    {% endif %}
-                                                    {% if job.gender == 'Female' %}
-                                                    <span style="text-transform:capitalize !important;"> {{ job.gender }} <i class="fa fa-female"></i></span>
-                                                    {% endif %}
-            
-                                                    <span style="text-transform:capitalize !important;" data-toggle="tooltip" data-placement="top" title="Employment Type">
-                                                        <i class="fa fa-bookmark-o"></i> {{ job.emp_type }}
-                                                    </span>
-                                                </div>
-                                                {% now "Y-m-d" as todays_date %}
-                                                        {% if job.job_date|date:"Y-m-d" == todays_date %}
-                                                                <span style="border: none;"><span class="label label-warning rounded">New</span></span>
+                                                        {% if job.emp_type == '--' %}
+                                                        
+                                                        {% else %}
+                                                        <span style="text-transform:capitalize !important;" data-toggle="tooltip" data-placement="top" title="Employment Type">
+                                                            <i class="fa fa-bookmark-o"></i> {{ job.emp_type }}
+                                                        </span>
+                                                        {% endif %}
+
+                                                        {% if job.salary != 'Unspecified' %}
+                                                        <span style="text-transform:capitalize !important;" data-toggle="tooltip" data-placement="top" title="Employment Type">
+                                                            <i class="fa fa-money"></i> {{ job.salary }}
+                                                        </span>
                                                         {% else %}
                                                         {% endif %}
-                                                </div>
-                                        
-                                            <!-- <span class="post-like fa fa-heart-o"></span> -->
-                                    </li>
+                                                        
+                                                    </div>
+                                                            <span><a href="https://www.bayt.com{{ job.submission_email }}" class="site-button btn-block btn-sm">Apply Now &nbsp; <i class="fa fa-check-circle"></i></a></span>
+                                                    </div>
+                                            
+                                                <!-- <span class="post-like fa fa-heart-o"></span> -->
+                                        </li>
                                         {% endfor %}
                                         {% endif %}    
                                     </ul>
@@ -277,22 +354,7 @@ crossorigin="anonymous"></script>
                                             {% endif %}
                                         </div>
                                     </div>
-                                </div>
-                                
-                                <div class="col-md-4">
-                                    <div class="sticky-top">
-                                        <div class="candidates-are-sys m-b30">
-                                            <div class="candidates-bx">
-                                                <div  class="side-widget">
-                                                    <h4 class="side-widget-title" style="background:#337ab7;">Advertisments</h4>
-            
-        
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-        
+                                </div>  
                             </div>
                         </div>
                     </div>
@@ -320,21 +382,16 @@ crossorigin="anonymous"></script>
 
             
             <div class="col-xl-12 col-lg-3 col-md-4 col-sm-4 col-12">
-                <ul class="nav nav-tabs" id="myTab" role="tablist" style="border-bottom:1px solid #337ab7;">
+                <ul class="nav nav-tabs" id="myTab" role="tablist" style="border-bottom:1px solid #2784F4;">
                     <li class="nav-item">
                         <a class="nav-link active show" id="location-tab" data-toggle="tab" href="#location" role="tab" aria-controls="location" aria-selected="false">Locations</a>
                       </li>
                       <li class="nav-item">
                         <a class="nav-link" id="category-tab" data-toggle="tab" href="#category" role="tab" aria-controls="category" aria-selected="false">Funcational Area</a>
                       </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="females-tab" data-toggle="tab" href="#females" role="tab" aria-controls="females" aria-selected="false">Females Only</a>
-                      </li>
+
                       <li class="nav-item">
                         <a class="nav-link" id="organization-tab" data-toggle="tab" href="#organization" role="tab" aria-controls="organization" aria-selected="false">Top Organizations</a>
-                      </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="expiring-tab" data-toggle="tab" href="#expiring" role="tab" aria-controls="expiring" aria-selected="false">Expiring Today</a>
                       </li>
                   </ul>
                   <div class="tab-content" id="myTabContent">
@@ -353,62 +410,93 @@ crossorigin="anonymous"></script>
                     <div class="tab-pane fade" id="category" role="tabpanel" aria-labelledby="category-tab">
                         <div class="widget border-0">
                             <ul class="list-2 w10 list-line">
-                                {% if categories  %}
+                                {% if categories %}
                                 {% for cate in categories %}
-                                    <li class="col-md-4">   <a href="{% url 'category' cate.slug_cate %}">{{ cate.category }} <span style="color:black;">({{ cate.total }})</span></a></li>
-                                {% endfor %}
+                                    {% if cate.category != '' %}
+                                    <li class="col-md-4">   <a href="{% url 'category' cate.slug_cate %}"> {{ cate.category }} <span style="color:black;">({{ cate.total }})</span></a></li>
+                                    {% else %}
+                                        
+                                    {% endif %}
+                                    {% endfor %}
                                 {% endif %}
+
                             </ul>
                         </div>
                     </div>
                     
-                    <div class="tab-pane fade" id="females" role="tabpanel" aria-labelledby="females-tab">
-                        <div class="widget border-0">
-                            <ul class="list-2 w10 list-line">
-                                {% if females_only  %}
-                                {% for f in females_only %}
-                                    <li class="col-md-4"><a href="{% url '' f.id f.jobs_slug %}">{{ f.job_title|replace_string|truncatechars:40 }}</a></li>
-                                {% endfor %}
-                                {% endif %}
-                            </ul>
-                        </div>
-                    </div>
                     <div class="tab-pane fade" id="organization" role="tabpanel" aria-labelledby="organization-tab">
                         <div class="widget border-0">
                             <ul class="list-2 w10 list-line">
                                 {% for i in organization %}
                                 <li class="col-md-4">
                                     {% if i.posted_by %}
-                                    <a href="{% url 'companies' i.posted_by i.slug_cpn  %}">{{ i.organzation|truncatechars:30 }} <span style="color:black;">({{ i.total }} Jobs)</span></a>
+                                    <a href="{% url 'companies' i.posted_by i.slug_cpn  %}">{{ i.organzation|truncatechars:30 }} <span style="color: black;">({{ i.total }} Jobs)</span></a>
                                     {% else %}
-                                    <a href="{% url 'companies' i.slug_cpn  %}">{{ i.organzation|truncatechars:30 }} <span style="color:black;">({{ i.total }} Jobs)</span></a>
+                                    <a href="{% url 'companies' i.slug_cpn  %}">{{ i.organzation|truncatechars:30 }} <span style="color: black;">({{ i.total }} Jobs)</span></a>
                                     {% endif %}
                                 </li>
                             {% endfor %}
                             </ul>
                         </div>
                     </div>
-                    <div class="tab-pane fade" id="expiring" role="tabpanel" aria-labelledby="expiring-tab">
-                        <div class="widget border-0">
-                            <ul class="list-2 w10 list-line">
-                                {% if ExpiringJobs  %}
-                                {% for e in ExpiringJobs %}
-                                    <li class="col-md-4"><a href="{% url '' e.id e.jobs_slug %}">{{ e.job_title|replace_string|truncatechars:40 }}</a></li>
-                                {% endfor %}
-                                {% endif %}
-                            </ul>
-                        </div>
-                    </div>
-
-
                   </div>
                   
             </div>
-            <hblack
+            
         </div>
         
     </div>
     </div>
     <!-- Call To Action END -->
 </div>
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    function showMore() {
+        var industryList = document.getElementById("industryList");
+        var industryItems = industryList.getElementsByClassName("industry-item");
+
+        for (var i = 5; i < industryItems.length; i++) {
+            industryItems[i].style.display = "block";
+        }
+
+        document.getElementById("showMoreBtn").style.display = "none";
+    }
+
+    function showMoreCity() {
+        var CityList = document.getElementById("cityList");
+        var CityItems = CityList.getElementsByClassName("city-item");
+    
+        for (var i = 5; i < CityItems.length; i++) {
+            CityItems[i].style.display = "block";
+        }
+    
+        document.getElementById("showMoreBtnCity").style.display = "none";
+    }
+
+    function showMoreCompany() {
+        var CompanyList = document.getElementById("companyList");
+        var CompanyItems = CompanyList.getElementsByClassName("company-item");
+    
+        for (var i = 2; i < CompanyItems.length; i++) {
+            CompanyItems[i].style.display = "block";
+        }
+    
+        document.getElementById("showMoreBtnCompany").style.display = "none";
+    }
+
+    function showMoreEmp() {
+        var EmpList = document.getElementById("EmpList");
+        var EmpItems = EmpList.getElementsByClassName("emp-item");
+    
+        for (var i = 3; i < EmpItems.length; i++) {
+            EmpItems[i].style.display = "block";
+        }
+    
+        document.getElementById("showMoreBtnEmp").style.display = "none";
+    }
+
+</script>
 {% endblock %}

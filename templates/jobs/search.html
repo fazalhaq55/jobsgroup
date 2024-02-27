@@ -92,7 +92,7 @@
                         <div class="col-lg-4 col-md-4">
                             <div class="form-group">
                                 <div class="input-group">
-                                    <input type="text" name="what" class="form-control" placeholder="Job Title, Keywords, or Phrase">
+                                    <input type="text" name="what" class="form-control" placeholder="Job Title or Keyword">
                                     <div class="input-group-append">
                                       <span class="input-group-text"><i class="fa fa-search"></i></span>
                                     </div>
@@ -102,26 +102,19 @@
                         <div class="col-lg-4 col-md-4">
                             <div class="form-group">
                                 <div class="input-group">
-                                <select name="emp_type" class="form-control">
-                                    <option value="">
-                                        By Employment Type
-                                    </option>
-                                        <option value="Full Time">Full Time</option>
-                                        <option value="Part Time">Part Time</option>
-                                </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-4">
-                            <div class="form-group">
-                                <div class="input-group">
-                                <select name="category" class="form-control">
-                                    <option value="">
-                                        By Category
-                                    </option>
-                                    {% if categories_for_search %}
-                                    {% for cate in categories_for_search %}
-                                        <option value="{{ cate.slug_cate }}">{{ cate.category }}</option>
+                                    <select name="category" class="form-control">
+                                        <option value="">
+                                            By Category
+                                        </option>
+                                        {% if categories_for_search %}
+                                        {% for cate in categories_for_search %}
+                                        {% if cate.category != '' %}
+                                        <option value="{{ cate.slug_cate }}">
+                                            {{ cate.category }}</option>
+                                        {% else %}
+                                            
+                                            {% endif %}
+
                                     {% endfor %}
                                     {% endif %}
                                 </select>
@@ -132,8 +125,23 @@
                         <div class="col-lg-4 col-md-4">
                             <div class="form-group">
                                 <div class="input-group">
-                                <select name="where" class="form-control">
-                                    <option value="">
+                                <select name="emp_type" class="form-control">
+                                    {% if emp_type_ %}
+                                        {% for i in emp_type_ %}
+                                            {% if i.emp_type != '--' %}
+                                            <option value="{{ i.emp_type }}">{{ i.emp_type }}</option>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endif %}
+                                </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <select name="where" class="form-control">
+                                        <option value="">
                                         By Location
                                     </option>
                                     {% for i in locations %}
@@ -173,91 +181,127 @@
         <div class="section-full bg-white content-inner-2" style="padding-top: 0px !important; padding-bottom: 0px !important;">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-8" id="jobRecordsContainer">
                         <ul class="post-job-bx">
                             {% if jobs_founded %}
                             {% for job in jobs_founded %}
                             <li class="_li">
-                                  
-                                <div class="d-flex m-b20">
-                                    <a href="{% url '' job.id job.jobs_slug %}">
-                                    <div class="job-post-company">
-                                        {% if not job.posted_by.company_image %}
-                                                {% if job.org_photo.photo %}
-                                                <figure>
-                                                    <img src="{{ job.org_photo.photo.url }}">
-                                                    </figure>
-                                                    {% endif %}
-                                                {% endif %}
-                                                {% if job.posted_by.company_image %}
-
-                                                        <figure>
-                                                            <img src="{{ job.posted_by.company_image.url }}">
-                                                            </figure>
-                                                {% endif %}
-                                    </div>
-                                    </a>
-                                    <div class="job-post-info">
+                              
+                                    <div class="d-flex m-b20">
+                                        {% now "Y-m-d" as todays_date %}
+                                        {% if job.job_date|date:"Y-m-d" == todays_date %}
+                                                <span style="border: none;"><span class="label label-warning rounded">New</span></span>
+                                        {% else %}
+                                        {% endif %}
                                         <a href="{% url '' job.id job.jobs_slug %}">
-                                        <h6>{{ job.job_title|replace_string|truncatechars:40 }}</h6>
+                                        <div class="job-post-company">
+                                            {% if not job.posted_by.company_image %}
+                                                    {% if job.org_photo.photo %}
+                                                    <figure>
+                                                        <img src="{{ job.org_photo.photo.url }}">
+                                                        </figure>
+                                                        {% endif %}
+                                                    {% endif %}
+                                                    {% if job.posted_by.company_image %}
+
+                                                            <figure>
+                                                                <img src="{{ job.posted_by.company_image.url }}">
+                                                                </figure>
+                                                    {% endif %}
+                                        </div>
                                         </a>
-                                        <ul>
-                                            <li data-toggle="tooltip" data-placement="top" title="{{ job.organzation }}"><i class="fa fa-map-marker"></i> 
+                                        <div class="job-post-info">
+                                            <a href="{% url '' job.id job.jobs_slug %}">
+                                            <h6>{{ job.job_title|replace_string|truncatechars:40 }}</h6>
+                                            </a>
+                                            <ul>
+                                                <li data-toggle="tooltip" data-placement="top" title="{{ job.organzation }}"><i class="fa fa-map-marker"></i> 
+                                                    {% if job.posted_by.id %}
+                                                    <a href="{% url 'companies' job.posted_by.id job.slug_cpn  %}" style="text-decoration:underline;">{{ job.organzation|truncatechars:40 }}</a>
+                                                    {% else %}
+                                                    <a href="{% url 'companies' job.slug_cpn  %}" style="text-decoration:underline;">{{ job.organzation|truncatechars:40 }}</a>
+                                                    {% endif %}
 
-                                                {% if job.posted_by.id %}
-                                                <a href="{% url 'companies' job.posted_by.id job.slug_cpn  %}" style="text-decoration:underline;">{{ job.organzation|truncatechars:40 }}</a>
-                                                {% else %}
-                                                <a href="{% url 'companies' job.slug_cpn  %}" style="text-decoration:underline;">{{ job.organzation|truncatechars:40 }}</a>
-                                                {% endif %}
-
-                                            </li>
-                                            <li data-toggle="tooltip" data-placement="top" title="Location"><i class="fa fa-globe"></i> 
-                                                {% if ',' not in job.job_location %}
-                                                    <span data-toggle="tooltip" data-placement="top" title="Location">{{ job.job_location }}</span>
-                                                {% else %}
-                                                <span data-toggle="tooltip" data-placement="top" title="Location">Multi Locations</span>
-                                                {% endif %}
-                                            </li>
-                                            <li><i class="fa fa-clock-o"></i> {{ job.whenpublished }}</li>
-                                        </ul>
+                                                </li>
+                                                <li data-toggle="tooltip" data-placement="top" title="Location"><i class="fa fa-globe"></i> 
+                                                    {% if ',' not in job.job_location %}
+                                                        <span data-toggle="tooltip" data-placement="top" title="Location">{{ job.job_location }}</span>
+                                                    {% else %}
+                                                    <span data-toggle="tooltip" data-placement="top" title="Location">Multi Locations</span>
+                                                    {% endif %}
+                                                </li>
+                                                <!-- <li><i class="fa fa-clock-o"></i> {{ job.whenpublished }}</li> -->
+                                            </ul>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="d-flex">
-                                    <div class="job-time mr-auto">                                                    
-                                        {% if job.no_of_jobs > '1' %}
-                                        <span style="text-transform:capitalize !important;">{{ job.no_of_jobs }} Vacancies</span>
-                                        {% endif %}
-
-                                        {% if job.gender == 'Male' %}
-                                        <span style="text-transform:capitalize !important;"> {{ job.gender }} <i class="fa fa-male"></i></span>
-                                        {% endif %}
-                                        {% if job.gender == 'Female' %}
-                                        <span style="text-transform:capitalize !important;"> {{ job.gender }} <i class="fa fa-female"></i></span>
-                                        {% endif %}
-
-                                        <span style="text-transform:capitalize !important;" data-toggle="tooltip" data-placement="top" title="Employment Type">
-                                            <i class="fa fa-bookmark-o"></i> {{ job.emp_type }}
-                                        </span>
-                                    </div>
-                                    {% now "Y-m-d" as todays_date %}
-                                            {% if job.job_date|date:"Y-m-d" == todays_date %}
-                                                    <span style="border: none;"><span class="label label-warning rounded">New</span></span>
+                                    <div class="d-flex">
+                                        <div class="job-time mr-auto">                                                    
+                                            {% if job.no_of_jobs > '1' %}
+                                            {% if 'Unspecified' in job.no_of_jobs %}
                                             {% else %}
+                                                    <span style="text-transform:capitalize !important;">
+                                                        {{ job.no_of_jobs }} Vacancies</span>
                                             {% endif %}
-                                    </div>
-                            
-                                <!-- <span class="post-like fa fa-heart-o"></span> -->
-                        </li>
+                                            {% endif %}
+    
+                                            {% if job.gender == 'Male' %}
+                                            <span style="text-transform:capitalize !important;"> {{ job.gender }} <i class="fa fa-male"></i></span>
+                                            {% endif %}
+                                            {% if job.gender == 'Female' %}
+                                            <span style="text-transform:capitalize !important;"> {{ job.gender }} <i class="fa fa-female"></i></span>
+                                            {% endif %}
+                                            
+                                            {% if job.emp_type == '--' %}
+                                            
+                                            {% else %}
+                                            <span style="text-transform:capitalize !important;" data-toggle="tooltip" data-placement="top" title="Employment Type">
+                                                <i class="fa fa-bookmark-o"></i> {{ job.emp_type }}
+                                            </span>
+                                            {% endif %}
+
+                                            {% if job.salary != 'Unspecified' %}
+                                            <span style="text-transform:capitalize !important;" data-toggle="tooltip" data-placement="top" title="Employment Type">
+                                                <i class="fa fa-money"></i> {{ job.salary }}
+                                            </span>
+                                            {% else %}
+                                            
+                                            {% endif %}
+
+                                            
+                                        </div>
+                                                <span><a href="https://www.bayt.com{{ job.submission_email }}" class="site-button btn-block btn-sm">Apply Now &nbsp; <i class="fa fa-check-circle"></i></a></span>
+                                        </div>
+                                
+                                    <!-- <span class="post-like fa fa-heart-o"></span> -->
+                            </li>
                             {% endfor %}
                             {% endif %}    
                         </ul>
                         <div class="m-t30">
-                            <div class="d-flex">
-                                {% if jobs.has_previous %}
-                                <a class="site-button button-sm mr-auto" href="?page={{ jobs.previous_page_number }}"><i class="ti-arrow-left"></i> Prev</a>
+                            <div class="pagination">
+                                {% if jobs_founded.has_previous %}
+                                <li>
+                                    <a href="?page=1"> <i class="fa fa-angle-double-left"></i></a>
+                                    <a href="?page={{ jobs_founded.previous_page_number }}"> <i class="fa fa-angle-left"></i></a>
+                                </li>
                                 {% endif %}
-                                {% if jobs.has_next %}
-                                <a class="site-button button-sm" href="?page={{ jobs.next_page_number }}">Next <i class="ti-arrow-right"></i></a>
+                                {% for num in jobs_founded.paginator.page_range %}
+                                {% if jobs_founded.number == num %}
+                                <li class="active">
+                                    <a><strong>{{ num }}</strong></a>
+                                </li>
+                                {% elif num > jobs_founded.number|add:'-3' and num < jobs_founded.number|add:'3' %}
+                                <li>
+                                    <a href="?page={{ num }}"> {{ num }}</a>
+                                </li>
+                                {% endif %}
+                                {% endfor %}
+            
+                                {% if jobs_founded.has_next %}
+                                <li>
+                                    <a href="?page={{ jobs_founded.next_page_number }}"><i class="fa fa-angle-right"></i></a>
+                                    <a href="?page={{ jobs_founded.paginator.num_pages }}"><i class="fa fa-angle-double-right"></i></a>
+                                </li>
                                 {% endif %}
                             </div>
                         </div>
@@ -268,7 +312,7 @@
                             <div class="candidates-are-sys m-b30">
                                 <div class="candidates-bx">
                                     <div  class="side-widget">
-                                        <h4 class="side-widget-title" style="background:#337ab7;">Advertisments</h4>
+                                        <h4 class="side-widget-title" style="background:#2784F4;">Advertisments</h4>
 
 
                                     </div>
