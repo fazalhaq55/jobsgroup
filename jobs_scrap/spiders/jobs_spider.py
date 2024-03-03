@@ -66,7 +66,7 @@ class JobsSpiderSpider(CrawlSpider):
             item['emp_type'] = response.xpath("//div[@class='card-content is-spaced p20t']//dl[@class='dlist is-spaced is-fitted t-small']/div[4]/dd/text()").get()
             item['salary'] = response.xpath("//div[@class='card-content is-spaced p20t']//dl[@class='dlist is-spaced is-fitted t-small']/div[5]/dd/text()").get()
             no_of_job = response.xpath("//div[@class='card-content is-spaced p20t']//dl[@class='dlist is-spaced is-fitted t-small']/div[7]/dd/text()").get()
-            if no_of_job is not None and 'Unspecified' in no_of_job:
+            if no_of_job is not None and 'Unspecified' in no_of_job:    
                 item['no_of_jobs'] = 0
             else:
                 item['no_of_jobs'] = response.xpath("//div[@class='card-content is-spaced p20t']//dl[@class='dlist is-spaced is-fitted t-small']/div[7]/dd/text()").get()

@@ -6,7 +6,7 @@
 <meta property="og:image" content="{% static 'assets/images/logo.png' %}" />
 <meta name="og:url" content="https://jobsgroup.org/companies">
 <meta name="og:title" content="Jobsgroup.org | Companies">
-<meta name="og:site_name" content="Jobsgroup.org | Jobs in Afghanistan">
+<meta name="og:site_name" content="Jobsgroup.org | Jobs in Saudi Arabia">
 <meta name="keywords"
   content="jobs in  {% for org in organizations %} {{ org.organzation }} {% endfor %}">
 <meta property="og:image" content="{% static 'assets/images/logo.png' %}" />
@@ -31,21 +31,6 @@
 </style>
 {% endblock %}
 
-{% block head %} 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-YXSEKCK7CV"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-YXSEKCK7CV');
-</script>
-
-<meta name="google-adsense-account" content="ca-pub-8245638410583528">
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8245638410583528"
-     crossorigin="anonymous"></script>
-{% endblock %}
 
 
 {% block content %}
