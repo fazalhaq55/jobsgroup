@@ -231,7 +231,15 @@
 
                                 <tr>
                                   <th>No. Of Jobs:</th>
-                                  <td>{{ job.no_of_jobs }}</td>
+                                  <td>
+
+                                    {% if job.no_of_jobs == None %}
+              
+                                    {% else %}
+                                    {{ job.no_of_jobs }}
+                                    {% endif %}
+
+                                  </td>
                                 </tr>
 
                                 <tr>
