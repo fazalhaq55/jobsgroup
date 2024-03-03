@@ -22,7 +22,6 @@ class JobsSpiderSpider(CrawlSpider):
         ),
 
     )
-
     def set_user_agent(self, request):
         request.headers['User-Agent'] = self.user_agent
         return request
