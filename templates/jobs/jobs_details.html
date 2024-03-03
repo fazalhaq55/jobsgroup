@@ -268,7 +268,7 @@
                      <br><br>
                     <div class="row row-bottom mrg-0 data" style="padding: 20px !important;">
                       {% autoescape off %}
-                      <h5> Job Descriptions: </h5>
+                      <h5> {% if job.job_descriptions %} Job Descriptions: {% endif %}</h5>
                       <div dir="{{ job.job_descriptions|bidi }}">
                           {{ job.job_descriptions }}
                       </div>
@@ -277,7 +277,7 @@
 
                     <div class="row row-bottom mrg-0 data" style="padding: 20px !important;">
                       {% autoescape off %}
-                      <h5> Job Requirements:</h5>
+                      <h5>  {% if job.job_requirements %} Job Requirements: {% endif %}</h5>
                       <div dir="{{ job.job_requirements|bidi }}">
                           {{ job.job_requirements }}
                       </div>
