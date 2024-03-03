@@ -110,6 +110,9 @@
                             <div class="form-group">
                                 <div class="input-group">
                                 <select name="emp_type" class="form-control">
+                                    <option value="">
+                                        By Employement Type
+                                    </option>
                                     {% if emp_type_ %}
                                         {% for i in emp_type_ %}
                                             {% if i.emp_type != '--' %}
