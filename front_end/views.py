@@ -418,3 +418,9 @@ def search_emp_type(request):
 
     return render(request, 'filter/emp_type_filter.html', context)
 
+
+def plain_text(request):
+    file = open('/home/djangoadmin/pyapps/jobsgroup_new/templates/jobs/ads.txt', 'r')
+    content = file.read()
+    file.close()
+    return HttpResponse(content, content_type='text/plain')

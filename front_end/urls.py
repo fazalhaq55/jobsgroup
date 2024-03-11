@@ -17,4 +17,5 @@ urlpatterns = [
     path('search_city', views.search_for_city, name='search_city'),
     path('search_cmp_type', views.search_cmp_type, name="search_cmp_type"),
     path('search_emp_type', views.search_emp_type, name='search_emp_type'),
+    path('ads.txt', views.plain_text, name='ads.txt')
 ]
