@@ -116,85 +116,9 @@
                             <div class="form-group">
                                 <div class="input-group">
                                 <select name="emp_type" class="form-control">
-                                    <form class="dezPlaceAni" action="{% url 'search' %}" method="GET">
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <input type="text" name="what" class="form-control" placeholder="Job Title or Keyword">
-                                        <div class="input-group-append">
-                                          <span class="input-group-text"><i class="fa fa-search"></i></span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <select name="category" class="form-control">
-                                            <option value="">
-                                                By Category
-                                            </option>
-                                            {% if categories_for_search %}
-                                            {% for cate in categories_for_search %}
-                                            {% if cate.category != '' %}
-                                            <option value="{{ cate.slug_cate }}">
-                                                {{ cate.category }}</option>
-                                            {% else %}
-                                                
-                                                {% endif %}
-
-                                        {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-lg-4 col-md-4">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                    <select name="emp_type" class="form-control">
-                                        <option value="">
-                                            By Employement Type
-                                        </option>
-                                        {% if emp_type %}
-                                            {% for i in emp_type %}
-                                                {% if i.emp_type != '--' %}
-                                                <option value="{{ i.emp_type }}">{{ i.emp_type }}</option>
-                                                {% endif %}
-                                            {% endfor %}
-                                        {% endif %}
-                                    </select>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="form-group">
-                                    <div class="input-group">
-                                        <select name="where" class="form-control">
-                                            <option value="">
-                                            By Location
-                                        </option>
-                                        {% for i in locations %}
-                                        {% if ',' not in i.job_location %}
-                                            <option value="{{ i.job_location }}">
-                                                {{ i.job_location }}
-                                            </option>
-                                        {% endif %}
-                                        {% endfor %}
-                                    </select>
-                                    </div>
-                                </div>
-                            </div>
-                            
-
-
-                            <div class="col-lg-2 col-md-6">
-                                <button type="submit" class="site-button btn-block">Find Job</button>
-                            </div>
-                        </div>
-                    </form>
+                                    <option value="">
+                                        By Employement Type
+                                    </option>
                                     {% if emp_type_ %}
                                         {% for i in emp_type_ %}
                                             {% if i.emp_type != '--' %}
